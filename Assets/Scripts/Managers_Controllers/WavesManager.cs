@@ -35,8 +35,6 @@ public class WavesManager : MonoBehaviour
         OnWaveEnd += () => isWaveInProgress = false;
 
         EnemyManager.I.OnAllEnemiesDead += () => OnWaveEnd?.Invoke();
-
-        OnWaveEnd += () => Debug.Log("Enemies are dead");
     }
 
     // Update is called once per frame

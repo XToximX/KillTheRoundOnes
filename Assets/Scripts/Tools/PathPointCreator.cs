@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-using Unity.VisualScripting.FullSerializer;
-using Unity.VisualScripting;
 
 [CustomEditor (typeof(Path))]
 public class PathPointCreator : Editor
