@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3254288009736281397}
   - component: {fileID: 894929247505346563}
-  - component: {fileID: 2782220590960377827}
+  - component: {fileID: -4014538432851171535}
   - component: {fileID: 6452733233390294465}
   m_Layer: 0
-  m_Name: Enemy2
+  m_Name: BasicEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.014599085, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,7 +93,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &2782220590960377827
+--- !u!114 &-4014538432851171535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

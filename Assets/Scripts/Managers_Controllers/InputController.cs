@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class InputController : MonoBehaviour
     public InputSystem_Actions input;
 
     public event Action OnEmptyClick;
+    public event Action OnInteracted;
+
+    private bool isMouseOverUI = false;
 
     private void Awake()
     {
@@ -30,9 +34,18 @@ public class InputController : MonoBehaviour
         input.Gameplay.LClick.performed += OnLeftClick;
     }
 
+    private void Update()
+    {
+        if (EventSystem.current.IsPointerOverGameObject() != isMouseOverUI)
+            isMouseOverUI = !isMouseOverUI;
+    }
+
 
     private void OnLeftClick(InputAction.CallbackContext callback)
     {
+        if (isMouseOverUI)
+            return;
+
         Vector2 mousePos = input.Gameplay.MousePos.ReadValue<Vector2>();
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
@@ -42,6 +55,7 @@ public class InputController : MonoBehaviour
         {
             IInteractable interactable = hit.collider?.GetComponent<IInteractable>();
 
+            OnInteracted?.Invoke();
             interactable.OnLeftClick();
         }
         else

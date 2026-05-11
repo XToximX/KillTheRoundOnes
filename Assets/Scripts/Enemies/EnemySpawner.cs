@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] GameObject enemyPrefab;
+
     private void Start()
     {
         WavesManager.I.OnWaveStart += SpawnWave;
@@ -18,11 +20,12 @@ public class EnemySpawner : MonoBehaviour
     {
         WaitForSeconds waitForSeconds = new WaitForSeconds(wave.SpawnInterval);
 
-        foreach(var row in wave.enemyList)
+        foreach(var row in wave.EnemyList)
         {
             for(int i = 0; i < row.Count; i++)
             {
-                Instantiate(row.EnemyPrefab);
+                var e = Instantiate(enemyPrefab);
+                e.GetComponent<Enemy>().SetUp(row.EnemyData);
                 yield return waitForSeconds;
             }
         }

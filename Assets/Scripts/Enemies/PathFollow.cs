@@ -11,10 +11,7 @@ public class PathFollow : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentStart = Path.I.pathPoints[0].position;
-        currentTarget = Path.I.pathPoints[1].position;
-
-        transform.position = currentStart;
+        
     }
 
     // Update is called once per frame
@@ -30,5 +27,15 @@ public class PathFollow : MonoBehaviour
         }
         else
             GetComponent<Enemy>().DestroyEnemy();
+    }
+
+    public void StartFollowingPath(SO_Enemy enemyData)
+    {
+        speed = enemyData.Speed;
+
+        currentStart = Path.I.pathPoints[0].position;
+        currentTarget = Path.I.pathPoints[1].position;
+
+        transform.position = currentStart;
     }
 }

@@ -44,7 +44,7 @@ public class PathPointCreator : Editor
 
     private void CreateNewPathPoint()
     {
-        GameObject newPathPoint = new GameObject("NewPathPoint");
+        GameObject newPathPoint = new GameObject("PathPoint");
         Undo.RegisterCreatedObjectUndo(newPathPoint, "Create Object");
 
         pathPointsProp.arraySize++;
@@ -62,7 +62,6 @@ public class PathPointCreator : Editor
     private void ResetPath()
     {
         Path path = (Path)target;
-        Debug.Log(pathPointsProp.arraySize);
 
         for(int i = pathPointsProp.arraySize - 1; i >= 0 ; i--)
         {
