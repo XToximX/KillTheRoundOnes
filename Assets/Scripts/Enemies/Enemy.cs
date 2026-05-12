@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 [RequireComponent (typeof(PathFollow))]
@@ -7,11 +8,15 @@ public class Enemy : MonoBehaviour
     private int hp;
     private float speed;
 
+    public int HP => hp;
+
+    [HideInInspector] public PathFollow PathFollow { get; private set; }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         EnemyManager.I.Register(gameObject);
-
+        PathFollow = GetComponent<PathFollow>();
     }
 
     public void SetUp(SO_Enemy enemyData)
@@ -23,6 +28,11 @@ public class Enemy : MonoBehaviour
         speed = enemyData.Speed;
 
         GetComponent<PathFollow>().StartFollowingPath(enemyData);
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        return;
     }
 
     public void DestroyEnemy()

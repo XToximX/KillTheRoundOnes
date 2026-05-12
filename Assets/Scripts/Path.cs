@@ -40,7 +40,7 @@ public class Path : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if(drawGizmos)
+        if (drawGizmos)
         {
             Gizmos.color = Color.yellow;
             Gizmos.matrix = transform.localToWorldMatrix;

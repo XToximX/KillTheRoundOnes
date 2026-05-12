@@ -1,14 +1,17 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent (typeof(TowerAttack))]
 public class Tower : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    private SO_Tower towerData;
+
+    private TowerAttack towerAttack;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.enabled = false;
+
     }
 
     // Update is called once per frame
@@ -19,13 +22,15 @@ public class Tower : MonoBehaviour
 
     public void SetUpTower(SO_Tower towerData)
     {
-        spriteRenderer.enabled = true;
-        spriteRenderer.color = towerData.Color;
+        this.towerData = towerData;
+        towerAttack = GetComponent <TowerAttack>();
+        towerAttack.SetAttackStats(towerData.AttackStats);
     }
 
     public void ClearTower()
     {
-        spriteRenderer.enabled = false;
+        transform.parent.GetComponent<TowerSlot>().ClearTower();
+        Destroy(gameObject);
         return;
-    }    
+    }
 }

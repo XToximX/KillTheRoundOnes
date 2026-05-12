@@ -11,7 +11,6 @@ public class TowerSlot : MonoBehaviour, IInteractable
     {
         towerSelector = FindAnyObjectByType<TowerSelector>();
         towerActions = FindAnyObjectByType<TowerActions>();
-        tower = transform.GetChild(0).GetComponent<Tower>();
     }
 
     public void OnLeftClick()
@@ -27,14 +26,14 @@ public class TowerSlot : MonoBehaviour, IInteractable
     public void PlaceTower(SO_Tower towerData)
     {
         spotState = TowerSpotState.OCCUPIED;
-
+        tower = Instantiate(towerData.TowerPrefab, transform).GetComponent<Tower>();
         tower.SetUpTower(towerData);
     }
 
     public void ClearTower()
     {
         spotState = TowerSpotState.EMPTY;
-        tower.ClearTower();
+        tower = null;
     }
 }
 

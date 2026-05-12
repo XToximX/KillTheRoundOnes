@@ -51,13 +51,32 @@ public class InputController : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
 
-        if (hit.collider != null)
+        if(hit.collider != null)
         {
-            IInteractable interactable = hit.collider?.GetComponent<IInteractable>();
+            switch(hit.collider.gameObject.tag)
+            {
+                case "TowerSlot":
+                    IInteractable interactable = hit.collider?.GetComponent<IInteractable>();
 
-            OnInteracted?.Invoke();
-            interactable.OnLeftClick();
+                    OnInteracted?.Invoke();
+                    interactable.OnLeftClick();
+                    break;
+
+                case "Enemy":
+                    OnInteracted?.Invoke();
+                    break;
+
+                default:
+                    OnEmptyClick?.Invoke();
+                    break;
+            }
         }
+
+        if (hit.collider != null && hit.collider.gameObject.CompareTag("TowerSlot"))
+        {
+            
+        }
+
         else
             OnEmptyClick?.Invoke();
     }

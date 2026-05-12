@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: LaserTower
   m_EditorClassIdentifier: Assembly-CSharp::SO_Tower
   name: Laser
-  color: {r: 0, g: 0.35566974, b: 1, a: 1}
+  towerPrefab: {fileID: 4688814261755269047, guid: 6f34854149ce68d45bf5bd47840b69e2, type: 3}
+  AttackStats:
+    damage: 1
+    range: 5
+    attackSpeed: 0.2

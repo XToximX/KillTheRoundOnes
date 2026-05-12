@@ -4,8 +4,22 @@ using UnityEngine;
 public class SO_Tower : ScriptableObject
 {
     [SerializeField] new string name;
-    [SerializeField] Color color = Color.white;
+    [SerializeField] GameObject towerPrefab;
+
+    [Header("Attack stats")]
+    private AttackStats attackStats;
+    
 
     public string Name => name;
-    public Color Color => color;
+    public GameObject TowerPrefab => towerPrefab;
+
+    public AttackStats AttackStats;
+}
+
+[System.Serializable]
+public struct AttackStats
+{
+    public float damage;
+    public float range;
+    public float attackSpeed;
 }

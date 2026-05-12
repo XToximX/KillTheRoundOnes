@@ -18,13 +18,12 @@ public class TowerActions : MonoBehaviour
         towerActionWheel.gameObject.SetActive(true);
         towerActionWheel.position = Camera.main.WorldToScreenPoint(tower.transform.position);
 
-        currentTower= tower;
+        currentTower = tower;
     }
 
     public void ClearTower()
     {
         currentTower.ClearTower();
-        currentTower.transform.parent.GetComponent<TowerSlot>().ClearTower();
         HideTowerActionWheel();
     }
 

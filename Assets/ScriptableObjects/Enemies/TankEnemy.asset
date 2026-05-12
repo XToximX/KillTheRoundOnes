@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TankEnemy
   m_EditorClassIdentifier: Assembly-CSharp::SO_Enemy
   name: Tank
-  color: {r: 0, g: 0, b: 0, a: 1}
+  color: {r: 1, g: 0, b: 0.06569576, a: 1}
   speed: 2
   hp: 10

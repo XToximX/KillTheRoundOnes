@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46f4cfdaf0afdb14c83492491f5e3349, type: 3}
+  m_Name: TestWave
+  m_EditorClassIdentifier: Assembly-CSharp::SO_Wave
+  waveNumber: 0
+  enemyList:
+  - EnemyData: {fileID: 11400000, guid: 929a25d4cb07af84a9abaf6a34b78a34, type: 2}
+    Count: 1
+  - EnemyData: {fileID: 11400000, guid: d10993d35073d7249b8fe317b7f611d4, type: 2}
+    Count: 1
+  - EnemyData: {fileID: 11400000, guid: bf2c724a14ec9e44ca1ebb19c1e16283, type: 2}
+    Count: 1
+  spawnInterval: 0.5

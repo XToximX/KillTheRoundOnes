@@ -18,5 +18,5 @@ public class SO_Wave : ScriptableObject
 public class EnemyTypeAndCount
 {
     public SO_Enemy EnemyData;
-    public int Count;
+    public int Count = 1;
 }

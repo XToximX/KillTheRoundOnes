@@ -8,6 +8,9 @@ public class PathFollow : MonoBehaviour
 
     private float speed = 5f;
 
+    private float distanceTravelled = 0f;
+    public float DistanceTravelled => distanceTravelled;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,9 +20,11 @@ public class PathFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position != currentTarget)
+        if (Vector2.Distance(transform.position, currentTarget) > 0.01f)
         {
+            Vector2 lastPos = transform.position;
             transform.position = Vector2.MoveTowards(transform.position, currentTarget, speed * Time.deltaTime);
+            distanceTravelled += Vector2.Distance(transform.position, lastPos);
         }
         else if (targetNumber != Path.I.pathPoints.Count)
         {
@@ -27,6 +32,11 @@ public class PathFollow : MonoBehaviour
         }
         else
             GetComponent<Enemy>().DestroyEnemy();
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     public void StartFollowingPath(SO_Enemy enemyData)
