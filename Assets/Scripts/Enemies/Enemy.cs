@@ -32,7 +32,9 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
-        return;
+        hp -= dmg;
+        if (hp < 0)
+            DestroyEnemy();
     }
 
     public void DestroyEnemy()

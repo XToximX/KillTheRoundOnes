@@ -17,4 +17,4 @@ MonoBehaviour:
   AttackStats:
     damage: 1
     range: 5
-    attackSpeed: 0.2
+    attackSpeed: 0.1

@@ -1,15 +1,19 @@
 using UnityEngine;
-using System.Linq;
 using System.Collections.Generic;
 
 public abstract class TowerAttack : MonoBehaviour
 {
-    private AttackStats attackStats;
-    private Enemy targetedEnemy;
-    private LayerMask enemyLayer;
+    protected AttackStats attackStats;
+    protected Enemy targetedEnemy;
+    protected LayerMask enemyLayer;
 
     [SerializeField] bool drawDebugLines = true; //If on the tower will draw line to nearest enemy
     [SerializeField] TargetingMode targetingMode = TargetingMode.FIRST;
+
+    protected virtual void Start()
+    {
+        InvokeRepeating(nameof(HandleAttack), 0f, attackStats.attackSpeed);
+    }
 
     public void SetAttackStats(AttackStats attackStats)
     {
@@ -75,7 +79,7 @@ public abstract class TowerAttack : MonoBehaviour
        
     }
 
-    private void Update()
+    protected void DrawDebugLines()
     {
         if (targetedEnemy != null && drawDebugLines)
         {
@@ -83,13 +87,14 @@ public abstract class TowerAttack : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void ChangeTargetingMode(TargetingMode newTargetingMode)
     {
-        TargetEnemy();
+        targetingMode = newTargetingMode;
     }
 
 }
 
+[System.Serializable]
 public enum TargetingMode
 {
     FIRST,

@@ -89,5 +89,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c7ed00c7fff214e886be00bcf6f27a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserTowerAttack
-  drawDebugLines: 1
+  drawDebugLines: 0
   targetingMode: 0

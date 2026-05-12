@@ -32,6 +32,7 @@ public class InputController : MonoBehaviour
         input.Gameplay.Enable();
 
         input.Gameplay.LClick.performed += OnLeftClick;
+        input.Gameplay.RClick.performed += (callback) => OnEmptyClick?.Invoke();
     }
 
     private void Update()
@@ -39,7 +40,6 @@ public class InputController : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject() != isMouseOverUI)
             isMouseOverUI = !isMouseOverUI;
     }
-
 
     private void OnLeftClick(InputAction.CallbackContext callback)
     {
@@ -71,12 +71,6 @@ public class InputController : MonoBehaviour
                     break;
             }
         }
-
-        if (hit.collider != null && hit.collider.gameObject.CompareTag("TowerSlot"))
-        {
-            
-        }
-
         else
             OnEmptyClick?.Invoke();
     }

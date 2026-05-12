@@ -8,18 +8,6 @@ public class Tower : MonoBehaviour
 
     private TowerAttack towerAttack;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetUpTower(SO_Tower towerData)
     {
         this.towerData = towerData;
@@ -32,5 +20,10 @@ public class Tower : MonoBehaviour
         transform.parent.GetComponent<TowerSlot>().ClearTower();
         Destroy(gameObject);
         return;
+    }
+
+    public void ChangeTargetingMode(TargetingMode targetingMode)
+    {
+        towerAttack.ChangeTargetingMode(targetingMode);
     }
 }

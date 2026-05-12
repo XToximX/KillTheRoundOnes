@@ -19,7 +19,7 @@ public class SO_Tower : ScriptableObject
 [System.Serializable]
 public struct AttackStats
 {
-    public float damage;
+    public int damage;
     public float range;
     public float attackSpeed;
 }
