@@ -25,8 +25,6 @@ public class LaserTowerAttack : TowerAttack
 
     protected override void HandleAttack()
     {
-        targetedEnemy = TargetEnemy();
-
         if(targetedEnemy)
             targetedEnemy.TakeDamage(attackStats.damage);
     }

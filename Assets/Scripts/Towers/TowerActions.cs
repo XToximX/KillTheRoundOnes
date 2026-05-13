@@ -6,6 +6,8 @@ public class TowerActions : MonoBehaviour
 {
     [SerializeField] private Transform towerActionWheel;
     [SerializeField] private GameObject targetingMenu;
+    [SerializeField] private GameObject towerRangeIndicator;
+
     private Tower currentTower;
 
     private void Start()
@@ -21,6 +23,8 @@ public class TowerActions : MonoBehaviour
         towerActionWheel.position = Camera.main.WorldToScreenPoint(tower.transform.position);
 
         currentTower = tower;
+
+        ShowTowerRange();
     }
 
     public void ClearTower()
@@ -31,14 +35,24 @@ public class TowerActions : MonoBehaviour
 
     public void HideTowerActionWheel()
     {
-        currentTower = null;
         targetingMenu.SetActive(false);
         towerActionWheel.gameObject.SetActive(false);
+        towerRangeIndicator.SetActive(false);
+
+        currentTower = null;
     }
 
     public void ShowTargetingMenu()
     {
         targetingMenu.SetActive(true);
+    }
+
+    private void ShowTowerRange()
+    {
+        float towerRange = currentTower.towerData.AttackStats.range;
+        towerRangeIndicator.transform.position = currentTower.transform.position;
+        towerRangeIndicator.transform.localScale = new Vector3(towerRange * 2, towerRange * 2, 1f);
+        towerRangeIndicator.SetActive(true);
     }
 
     public void ChangeTargetingMode(string targetingModeName)

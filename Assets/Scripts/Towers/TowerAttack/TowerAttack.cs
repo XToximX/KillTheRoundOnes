@@ -15,14 +15,16 @@ public abstract class TowerAttack : MonoBehaviour
     {
         this.attackStats = attackStats;
 
-        enemyLayer = LayerMask.NameToLayer("Enemy");
+        enemyLayer = LayerMask.GetMask("Enemy");
 
         StartCoroutine(AttackCorutine());
+
+        InvokeRepeating(nameof(TargetEnemy), 0.1f, 0.1f);
     }
 
     protected abstract void HandleAttack();
 
-    public virtual Enemy TargetEnemy()
+    public virtual void TargetEnemy()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, attackStats.range);
 
@@ -74,8 +76,7 @@ public abstract class TowerAttack : MonoBehaviour
                 bestValue = value;
             }
         }
-
-        return bestEnemy;
+        targetedEnemy = bestEnemy;
     }
 
     protected void DrawDebugLines()
@@ -97,13 +98,12 @@ public abstract class TowerAttack : MonoBehaviour
 
         while (true)
         {
-            HandleAttack();
             yield return wait;
+            HandleAttack();
         }
     }
 }
 
-[System.Serializable]
 public enum TargetingMode
 {
     FIRST,

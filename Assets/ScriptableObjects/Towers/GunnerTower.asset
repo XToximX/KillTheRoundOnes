@@ -15,6 +15,6 @@ MonoBehaviour:
   name: Gunner
   towerPrefab: {fileID: 7631411425935583295, guid: ce17e3c0c250e3244901b32df76812c9, type: 3}
   AttackStats:
-    damage: 1
+    damage: 5
     range: 3
     attackSpeed: 0.3

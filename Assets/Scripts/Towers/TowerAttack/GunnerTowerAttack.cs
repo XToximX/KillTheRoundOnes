@@ -12,7 +12,7 @@ public class GunnerTowerAttack : TowerAttack
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, transform.position);
 
-        lineRenderer.enabled = false;
+        lineRenderer.enabled = true;
     }
 
     private void Update()
@@ -22,20 +22,20 @@ public class GunnerTowerAttack : TowerAttack
 
     protected override void HandleAttack()
     {
-        targetedEnemy = TargetEnemy();
-
         if(targetedEnemy != null)
         {
             Vector2 enemyDir = targetedEnemy.transform.position - transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, enemyDir, enemyLayer);
-            //Debug.DrawLine(transform.position, enemyDir, Color.red, 1f);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, enemyDir, attackStats.range, enemyLayer);
 
-            Debug.Log(hit.collider.name);
+            if (hit.collider)
+            {
+                hit.collider.GetComponent<Enemy>().TakeDamage(attackStats.damage);
 
-            //lineRenderer.SetPosition(1, hit.transform.position);
-            //lineRenderer.enabled = true;
+                lineRenderer.enabled = true;
+                lineRenderer.SetPosition(1, hit.point);
 
-            //Invoke(nameof(DisableLineRenderer), 0.05f);
+                Invoke(nameof(DisableLineRenderer), 0.05f);
+            }
         }
     }
 

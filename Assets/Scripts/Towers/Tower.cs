@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent (typeof(TowerAttack))]
 public class Tower : MonoBehaviour
 {
-    private SO_Tower towerData;
+    public SO_Tower towerData {  get; private set; }
 
     private TowerAttack towerAttack;
 
