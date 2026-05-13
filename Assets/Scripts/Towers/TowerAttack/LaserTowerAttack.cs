@@ -1,28 +1,16 @@
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class LaserTowerAttack : TowerAttack
 {
-    private LineRenderer lineRenderer;
+    [SerializeField] private LineRenderer lineRenderer;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-
-        lineRenderer = gameObject.AddComponent<LineRenderer>();
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-
-        lineRenderer.startColor = Color.red;
-        lineRenderer.endColor = Color.red;
-
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
-
         lineRenderer.positionCount = 2;
 
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, transform.position);
-
-        InvokeRepeating(nameof(HandleAttack), 0f, attackStats.attackSpeed);
     }
 
     private void Update()
@@ -35,9 +23,9 @@ public class LaserTowerAttack : TowerAttack
             lineRenderer.SetPosition(1, transform.position);
     }
 
-    public override void HandleAttack()
+    protected override void HandleAttack()
     {
-        TargetEnemy();
+        targetedEnemy = TargetEnemy();
 
         if(targetedEnemy)
             targetedEnemy.TakeDamage(attackStats.damage);

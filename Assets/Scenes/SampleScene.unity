@@ -820,7 +820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WavesManager
   waves:
-  - {fileID: 11400000, guid: ab8029767c2f79e478f43b43397c82a0, type: 2}
+  - {fileID: 11400000, guid: d290027931780254f8723dfb1cee329e, type: 2}
 --- !u!1 &305217112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,7 +1406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Standard
+  m_text: Gunner
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1647,7 +1647,7 @@ GameObject:
   - component: {fileID: 646872936}
   - component: {fileID: 646872935}
   m_Layer: 0
-  m_Name: StandardBtn
+  m_Name: GunnerBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

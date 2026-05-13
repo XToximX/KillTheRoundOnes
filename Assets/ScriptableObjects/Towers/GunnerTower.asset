@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7b0de04a75423f49aa26c4e0e19d565, type: 3}
-  m_Name: ArcherTower
+  m_Name: GunnerTower
   m_EditorClassIdentifier: Assembly-CSharp::SO_Tower
-  name: Archer
+  name: Gunner
   towerPrefab: {fileID: 7631411425935583295, guid: ce17e3c0c250e3244901b32df76812c9, type: 3}
   AttackStats:
     damage: 1
     range: 3
-    attackSpeed: 2
+    attackSpeed: 0.3

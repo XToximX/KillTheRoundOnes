@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public abstract class TowerAttack : MonoBehaviour
 {
@@ -7,30 +8,25 @@ public abstract class TowerAttack : MonoBehaviour
     protected Enemy targetedEnemy;
     protected LayerMask enemyLayer;
 
-    [SerializeField] bool drawDebugLines = true; //If on the tower will draw line to nearest enemy
+    [SerializeField] protected bool drawDebugLines = true; //If on the tower will draw line to nearest enemy
     [SerializeField] TargetingMode targetingMode = TargetingMode.FIRST;
-
-    protected virtual void Start()
-    {
-        InvokeRepeating(nameof(HandleAttack), 0f, attackStats.attackSpeed);
-    }
 
     public void SetAttackStats(AttackStats attackStats)
     {
         this.attackStats = attackStats;
 
         enemyLayer = LayerMask.NameToLayer("Enemy");
+
+        StartCoroutine(AttackCorutine());
     }
 
-    public abstract void HandleAttack();
+    protected abstract void HandleAttack();
 
-    public virtual void TargetEnemy()
+    public virtual Enemy TargetEnemy()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, attackStats.range);
 
         Enemy bestEnemy = null;
-
-        targetedEnemy = null;
 
         float bestValue = float.MinValue;
 
@@ -44,11 +40,11 @@ public abstract class TowerAttack : MonoBehaviour
             switch(targetingMode)
             {
                 case TargetingMode.FIRST:
-                    value = enemy.PathFollow.DistanceTravelled;
+                    value = enemy.PathFollow.distanceTravelled;
                     break;
 
                 case TargetingMode.LAST:
-                    value = -enemy.PathFollow.DistanceTravelled;
+                    value = -enemy.PathFollow.distanceTravelled;
                     break;
 
                 case TargetingMode.FURTHEST:
@@ -60,11 +56,15 @@ public abstract class TowerAttack : MonoBehaviour
                     break;
 
                 case TargetingMode.STRONGEST:
-                    value = enemy.HP * 1000 + enemy.PathFollow.DistanceTravelled;
+                    value = enemy.HP * 1000 + enemy.PathFollow.distanceTravelled;
                     break;
 
                 case TargetingMode.WEAKEST:
-                    value = -enemy.HP * 1000 + enemy.PathFollow.DistanceTravelled;
+                    value = -enemy.HP * 1000 + enemy.PathFollow.distanceTravelled;
+                    break;
+
+                default:
+                    value = enemy.PathFollow.distanceTravelled;
                     break;
             }
 
@@ -75,8 +75,7 @@ public abstract class TowerAttack : MonoBehaviour
             }
         }
 
-        targetedEnemy = bestEnemy;
-       
+        return bestEnemy;
     }
 
     protected void DrawDebugLines()
@@ -92,6 +91,16 @@ public abstract class TowerAttack : MonoBehaviour
         targetingMode = newTargetingMode;
     }
 
+    protected virtual IEnumerator AttackCorutine()
+    {
+        WaitForSeconds wait = new WaitForSeconds(attackStats.attackSpeed);
+
+        while (true)
+        {
+            HandleAttack();
+            yield return wait;
+        }
+    }
 }
 
 [System.Serializable]

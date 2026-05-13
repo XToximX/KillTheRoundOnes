@@ -1,20 +1,20 @@
+using System;
 using UnityEngine;
 
 public class PathFollow : MonoBehaviour
 {
-    private Vector3 currentStart; 
+    private Vector3 currentStart;
     private Vector3 currentTarget;
     private int targetNumber = 1;
 
     private float speed = 5f;
 
-    private float distanceTravelled = 0f;
-    public float DistanceTravelled => distanceTravelled;
+    public float distanceTravelled { get; private set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        distanceTravelled = 0f;
     }
 
     // Update is called once per frame
@@ -22,13 +22,16 @@ public class PathFollow : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, currentTarget) > 0.01f)
         {
-            Vector2 lastPos = transform.position;
-            transform.position = Vector2.MoveTowards(transform.position, currentTarget, speed * Time.deltaTime);
-            distanceTravelled += Vector2.Distance(transform.position, lastPos);
+            float distance = speed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, currentTarget, distance);
+            distanceTravelled += distance;
         }
         else if (targetNumber != Path.I.pathPoints.Count)
         {
             currentTarget = Path.I.pathPoints[targetNumber++].position;
+            float distance = speed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, currentTarget, distance);
+            distanceTravelled += distance;
         }
         else
             GetComponent<Enemy>().DestroyEnemy();
