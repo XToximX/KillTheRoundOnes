@@ -5,14 +5,10 @@ public class SO_Tower : ScriptableObject
 {
     [SerializeField] new string name;
     [SerializeField] GameObject towerPrefab;
-
-    [Header("Attack stats")]
-    private AttackStats attackStats;
     
 
     public string Name => name;
     public GameObject TowerPrefab => towerPrefab;
-
     public AttackStats AttackStats;
 }
 

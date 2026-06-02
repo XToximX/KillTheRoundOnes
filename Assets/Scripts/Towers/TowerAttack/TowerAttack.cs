@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 
 public abstract class TowerAttack : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public abstract class TowerAttack : MonoBehaviour
     [SerializeField] protected bool drawDebugLines = true; //If on the tower will draw line to nearest enemy
     [SerializeField] TargetingMode targetingMode = TargetingMode.FIRST;
 
-    public void SetAttackStats(AttackStats attackStats)
+    public virtual void SetAttackStats(AttackStats attackStats)
     {
         this.attackStats = attackStats;
 
@@ -28,55 +29,57 @@ public abstract class TowerAttack : MonoBehaviour
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, attackStats.range);
 
-        Enemy bestEnemy = null;
-
-        float bestValue = float.MinValue;
-
-        foreach(Collider2D hit in hits)
+        if (hits.Length > 0)
         {
-            if (!hit.TryGetComponent<Enemy>(out Enemy enemy))
-                continue;
+            float bestValue = float.MinValue;
+            Enemy bestEnemy = null;
 
-            float value = 0f;
-
-            switch(targetingMode)
+            foreach (Collider2D hit in hits)
             {
-                case TargetingMode.FIRST:
-                    value = enemy.PathFollow.distanceTravelled;
-                    break;
+                if (!hit.TryGetComponent<Enemy>(out Enemy enemy))
+                    continue;
 
-                case TargetingMode.LAST:
-                    value = -enemy.PathFollow.distanceTravelled;
-                    break;
+                float value = 0f;
 
-                case TargetingMode.FURTHEST:
-                    value = Vector2.SqrMagnitude(transform.position - enemy.transform.position);
-                    break;
+                switch (targetingMode)
+                {
+                    case TargetingMode.FIRST:
+                        value = enemy.PathFollow.distanceTravelled;
+                        break;
 
-                case TargetingMode.CLOSEST:
-                    value = -Vector2.SqrMagnitude(transform.position - enemy.transform.position);
-                    break;
+                    case TargetingMode.LAST:
+                        value = -enemy.PathFollow.distanceTravelled;
+                        break;
 
-                case TargetingMode.STRONGEST:
-                    value = enemy.HP * 1000 + enemy.PathFollow.distanceTravelled;
-                    break;
+                    case TargetingMode.FURTHEST:
+                        value = Vector2.SqrMagnitude(transform.position - enemy.transform.position);
+                        break;
 
-                case TargetingMode.WEAKEST:
-                    value = -enemy.HP * 1000 + enemy.PathFollow.distanceTravelled;
-                    break;
+                    case TargetingMode.CLOSEST:
+                        value = -Vector2.SqrMagnitude(transform.position - enemy.transform.position);
+                        break;
 
-                default:
-                    value = enemy.PathFollow.distanceTravelled;
-                    break;
+                    case TargetingMode.STRONGEST:
+                        value = enemy.HP * 1000 + enemy.PathFollow.distanceTravelled;
+                        break;
+
+                    case TargetingMode.WEAKEST:
+                        value = -enemy.HP * 1000 + enemy.PathFollow.distanceTravelled;
+                        break;
+
+                    default:
+                        value = enemy.PathFollow.distanceTravelled;
+                        break;
+                }
+
+                if (value > bestValue)
+                {
+                    bestEnemy = enemy;
+                    bestValue = value;
+                }
             }
-
-            if (value > bestValue)
-            {
-                bestEnemy = enemy;
-                bestValue = value;
-            }
+            targetedEnemy = bestEnemy;
         }
-        targetedEnemy = bestEnemy;
     }
 
     protected void DrawDebugLines()
@@ -101,6 +104,21 @@ public abstract class TowerAttack : MonoBehaviour
             yield return wait;
             HandleAttack();
         }
+    }
+
+    public void RaiseDmg(int val)
+    {
+        attackStats.damage += val;
+    }
+
+    public void RaiseAS(float val)
+    {
+        attackStats.attackSpeed += val;
+    }
+
+    public void RaiseRange(float val)
+    {
+        attackStats.range += val;
     }
 }
 

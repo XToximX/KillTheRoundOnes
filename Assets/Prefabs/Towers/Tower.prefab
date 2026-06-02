@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7930590409411426149}
   - component: {fileID: 4942973532564132113}
   - component: {fileID: 3518085938932098213}
+  - component: {fileID: -5562768531262652607}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -104,3 +105,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82722d226a3e0814c8b0dfd3f452e044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
+--- !u!114 &-5562768531262652607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936661634348625680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815e5161355ecb6458bc2a302ff87bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerUpgrade
+  upgrades: {fileID: 0}

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b0de04a75423f49aa26c4e0e19d565, type: 3}
+  m_Name: BladeTower
+  m_EditorClassIdentifier: Assembly-CSharp::SO_Tower
+  name: BladeTower
+  towerPrefab: {fileID: 4587857620702166577, guid: ca53f73d265501d43bc87f506144a86b, type: 3}
+  AttackStats:
+    damage: 2
+    range: 2.5
+    attackSpeed: 2

@@ -1,7 +1,7 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent (typeof(TowerAttack))]
+[RequireComponent (typeof(TowerUpgrade))]
 public class Tower : MonoBehaviour
 {
     public SO_Tower towerData {  get; private set; }

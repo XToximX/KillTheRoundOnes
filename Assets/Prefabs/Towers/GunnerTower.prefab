@@ -206,6 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3536a3ef414d54aa888ef6cc5f9398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArcherTowerAttack
-  drawDebugLines: 1
+  drawDebugLines: 0
   targetingMode: 0
   lineRenderer: {fileID: 355201840465183137}
