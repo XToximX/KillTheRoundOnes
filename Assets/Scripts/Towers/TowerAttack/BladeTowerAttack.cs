@@ -2,25 +2,31 @@ using UnityEngine;
 
 public class BladeTowerAttack : TowerAttack
 {
-    [SerializeField] GameObject blade;
+    [SerializeField] Transform bladesCenter;
 
     public override void SetUpTower(AttackStats attackStats, TowerType towerType)
     {
         this.attackStats = attackStats;
         this.towerType = towerType;
 
-        blade.GetComponent<BladeContact>().damage = attackStats.damage;
-
         enemyLayer = LayerMask.GetMask("Enemy");
 
-        blade.transform.localScale = new Vector3 (0.3f, attackStats.range * 2, 1);
+        SetBlades();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float rotationSpeed = 360f / attackStats.attackSpeed;
-        blade.transform.Rotate(0f, 0f, -rotationSpeed * Time.deltaTime);
+        float rotationSpeed = 360f / (1f / attackStats.attackSpeed);
+        bladesCenter.transform.Rotate(0f, 0f, -rotationSpeed * Time.deltaTime);
+    }
+
+    public void SetBlades()
+    {
+        foreach(Transform blade in bladesCenter)
+        {
+            blade.localScale = new Vector3(0.3f, attackStats.range * 2, 1);
+        }
     }
 
     protected override void HandleAttack()

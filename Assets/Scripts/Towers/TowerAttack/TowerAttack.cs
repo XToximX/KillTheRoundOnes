@@ -10,6 +10,8 @@ public abstract class TowerAttack : TowerBehaviour
     [SerializeField] protected bool drawDebugLines = true; //If on the tower will draw line to nearest enemy
     [SerializeField] TargetingMode targetingMode = TargetingMode.FIRST;
 
+    WaitForSeconds wait;
+
     public override void SetUpTower(AttackStats attackStats, TowerType towerType)
     {
         this.attackStats = attackStats;
@@ -17,6 +19,7 @@ public abstract class TowerAttack : TowerBehaviour
 
         enemyLayer = LayerMask.GetMask("Enemy");
 
+        wait = new WaitForSeconds(1f / attackStats.attackSpeed);
         StartCoroutine(AttackCorutine());
 
         InvokeRepeating(nameof(TargetEnemy), 0.1f, 0.1f);
@@ -80,6 +83,7 @@ public abstract class TowerAttack : TowerBehaviour
                     bestValue = value;
                 }
             }
+
             targetedEnemy = bestEnemy;
         }
     }
@@ -99,7 +103,6 @@ public abstract class TowerAttack : TowerBehaviour
 
     protected virtual IEnumerator AttackCorutine()
     {
-        WaitForSeconds wait = new WaitForSeconds(attackStats.attackSpeed);
 
         while (true)
         {
@@ -108,31 +111,16 @@ public abstract class TowerAttack : TowerBehaviour
         }
     }
 
-    public void RaiseDmg(int val)
+    public override void GiveBuff(AttackStats buff)
     {
-        attackStats.damage += val;
-    }
-
-    public void RaiseAS(float val)
-    {
-        attackStats.attackSpeed += val;
-    }
-
-    public void RaiseRange(float val)
-    {
-        attackStats.range += val;
-    }
-
-    public void GiveBuff(AttackStats buff)
-    {
-        Debug.Log(attackStats.range);
         attackStats.AddStats(buff, towerType ==  TowerType.ATTACK_R);
-        Debug.Log(attackStats.range);
+        wait = new WaitForSeconds(1f / attackStats.attackSpeed);
     }
 
-    public void RemoveBuff(AttackStats buff)
+    public override void RemoveBuff(AttackStats buff)
     {
         attackStats.ReduceStats(buff, towerType == TowerType.ATTACK_R);
+        wait = new WaitForSeconds(1f / attackStats.attackSpeed);
     }
 }
 

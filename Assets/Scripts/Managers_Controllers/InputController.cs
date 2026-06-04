@@ -14,6 +14,8 @@ public class InputController : MonoBehaviour
 
     private bool isMouseOverUI = false;
 
+    private LayerMask mouseInteractLayer;
+
     private void Awake()
     {
         if(I != null && I != this )
@@ -25,6 +27,8 @@ public class InputController : MonoBehaviour
         I = this;
 
         input = new InputSystem_Actions();
+
+        mouseInteractLayer = LayerMask.GetMask("TowerSlot", "Enemy");
     }
 
     private void OnEnable()
@@ -49,7 +53,7 @@ public class InputController : MonoBehaviour
         Vector2 mousePos = input.Gameplay.MousePos.ReadValue<Vector2>();
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
-        RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
+        RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero, Mathf.Infinity, mouseInteractLayer);
 
         IInteractable interactable;
 
@@ -59,13 +63,6 @@ public class InputController : MonoBehaviour
             {
                 case "TowerSlot":
                     interactable = hit.collider?.GetComponent<IInteractable>();
-
-                    OnInteracted?.Invoke();
-                    interactable.OnLeftClick();
-                    break;
-
-                case "Tower":
-                    interactable = hit.transform?.parent.GetComponent<IInteractable>();
 
                     OnInteracted?.Invoke();
                     interactable.OnLeftClick();

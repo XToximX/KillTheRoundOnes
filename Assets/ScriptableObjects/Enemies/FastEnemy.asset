@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_Enemy
   name: Fast
   color: {r: 0.15496778, g: 1, b: 0, a: 1}
-  speed: 10
+  speed: 6
   hp: 2

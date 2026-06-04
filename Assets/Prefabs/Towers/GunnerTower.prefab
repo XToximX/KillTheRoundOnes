@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4942973532564132113, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7930590409411426149, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -81,7 +81,7 @@ PrefabInstance:
       addedObject: {fileID: 441687391947507591}
     - targetCorrespondingSourceObject: {fileID: 4936661634348625680, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6752568673980154101}
+      addedObject: {fileID: -3043454754072217095}
   m_SourcePrefab: {fileID: 100100000, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
 --- !u!1 &7631411425935583295 stripped
 GameObject:
@@ -213,7 +213,7 @@ MonoBehaviour:
   drawDebugLines: 0
   targetingMode: 0
   lineRenderer: {fileID: 355201840465183137}
---- !u!114 &6752568673980154101
+--- !u!114 &-3043454754072217095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,6 +222,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7631411425935583295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a9ba5d4aa0c66c45b9c6063971540f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ea13b7615308d0459fb9b008f1cf5a0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BladeTowerUpgrade
+  m_EditorClassIdentifier: Assembly-CSharp::GunnerTowerUpgrade

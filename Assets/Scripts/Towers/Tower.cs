@@ -57,4 +57,19 @@ public abstract class TowerBehaviour : MonoBehaviour
     {
         return attackStats;
     }
+
+    public virtual void PernamentAddStats(AttackStats bonus)
+    {
+        attackStats.PernamentAddStats(bonus);
+    }
+
+    public virtual void GiveBuff(AttackStats buff)
+    {
+        attackStats.AddStats(buff, towerType == TowerType.ATTACK_R);
+    }
+
+    public virtual void RemoveBuff(AttackStats buff)
+    {
+        attackStats.ReduceStats(buff, towerType == TowerType.ATTACK_R);
+    }
 }

@@ -17,5 +17,5 @@ MonoBehaviour:
   towerType: 2
   AttackStats:
     damage: 0
-    range: 4
+    range: 3
     attackSpeed: 0

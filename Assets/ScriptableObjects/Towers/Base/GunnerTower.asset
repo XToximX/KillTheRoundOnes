@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_Tower
   name: Gunner
   towerPrefab: {fileID: 7631411425935583295, guid: ce17e3c0c250e3244901b32df76812c9, type: 3}
+  towerType: 0
   AttackStats:
     damage: 5
     range: 3
-    attackSpeed: 0.3
+    attackSpeed: 3

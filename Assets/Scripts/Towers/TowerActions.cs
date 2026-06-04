@@ -1,12 +1,17 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System;
+using UnityEngine.UI;
 
 public class TowerActions : MonoBehaviour
 {
     [SerializeField] private Transform towerActionWheel;
     [SerializeField] private GameObject targetingMenu;
     [SerializeField] private GameObject towerRangeIndicator;
+
+    [Header("Level indicator")]
+    [SerializeField] Sprite emptyLvlSprite;
+    [SerializeField] Sprite fullLvlSprite;
+    [SerializeField] Image[] lvlIndicators;
+
 
     private Tower currentTower;
     private TowerType towerType;
@@ -26,11 +31,13 @@ public class TowerActions : MonoBehaviour
         towerActionWheel.gameObject.SetActive(true);
         towerActionWheel.position = Camera.main.WorldToScreenPoint(tower.transform.position);
 
+        ShowTowerLevel();
+
         if (towerType != TowerType.ATTACK_R)
             targetingMenu.SetActive(false);
 
-
-        ShowTowerRange();
+        if(towerType != TowerType.ATTACK_M)
+            ShowTowerRange();
     }
 
     public void ClearTower()
@@ -98,7 +105,26 @@ public class TowerActions : MonoBehaviour
     public void LvlUpTower()
     {
         currentTower.GetComponent<TowerUpgrade>().LvlUp();
+        ShowTowerLevel();
 
-        HideTowerActionWheel();
+        if(towerType != TowerType.ATTACK_M)
+            ShowTowerRange();
+        //HideTowerActionWheel();
+    }
+
+    private void ShowTowerLevel()
+    {
+        int towerLvl = currentTower.GetComponent<TowerUpgrade>().CurrentLvl;
+        int count = 0;
+        
+        foreach(Image image in lvlIndicators)
+        {
+            if (count < towerLvl)
+                image.sprite = fullLvlSprite;
+            else
+                image.sprite = emptyLvlSprite;
+            
+            count++;
+        }
     }
 }

@@ -24,7 +24,12 @@ public struct AttackStats
     public void AddStats(AttackStats bonus, bool isRanged)
     {
         damage += bonus.damage;
-        attackSpeed += bonus.attackSpeed;
+
+        if(attackSpeed + bonus.attackSpeed < 10f)
+            attackSpeed += bonus.attackSpeed;
+        else
+            attackSpeed = 10f;
+
         if (isRanged)
             range += bonus.range;
     }
@@ -48,5 +53,17 @@ public struct AttackStats
             else 
                 range = 0;
         }
+    }
+
+    public void PernamentAddStats(AttackStats bonus)
+    {
+        damage += bonus.damage;
+
+        if (attackSpeed + bonus.attackSpeed < 10f)
+            attackSpeed += bonus.attackSpeed;
+        else
+            attackSpeed = 10f;
+
+        range += bonus.range;
     }
 }

@@ -74,7 +74,7 @@ PrefabInstance:
       addedObject: {fileID: 3185517442813294144}
     - targetCorrespondingSourceObject: {fileID: 4936661634348625680, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 414600050089042974}
+      addedObject: {fileID: 1181831033617614554}
   m_SourcePrefab: {fileID: 100100000, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
 --- !u!1 &4995124935222668433 stripped
 GameObject:
@@ -95,9 +95,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SupportTower
   buffStats:
     damage: 1
-    range: 5
-    attackSpeed: -0.5
---- !u!114 &414600050089042974
+    range: 2
+    attackSpeed: 2
+  SlowValue: 0.15
+--- !u!114 &1181831033617614554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,6 +107,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4995124935222668433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d46693b058e59445b70eadff913ba9d, type: 3}
+  m_Script: {fileID: 11500000, guid: bb3f49d23bfa9c14393292a75dc42583, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LaserTowerUpgrade
+  m_EditorClassIdentifier: Assembly-CSharp::SupportTowerUpgrade
+  lvl1AttackStats:
+    damage: 0
+    range: 1
+    attackSpeed: 0
+  lvl2SlowValue: 0.25

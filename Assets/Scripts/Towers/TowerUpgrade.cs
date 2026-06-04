@@ -5,9 +5,12 @@ using UnityEngine;
 public abstract class TowerUpgrade : MonoBehaviour
 {
     public int CurrentLvl { get; private set; }
+    protected TowerBehaviour towerBehaviour;
 
     private void Start()
     {
+        towerBehaviour = GetComponent<TowerBehaviour>();
+
         CurrentLvl = 0;
     }
 
