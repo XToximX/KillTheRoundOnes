@@ -1,20 +1,19 @@
-using UnityEngine;
-using System.Collections.Generic;
+using Mono.Cecil;
 using System.Collections;
-using Unity.VisualScripting;
+using UnityEngine;
 
-public abstract class TowerAttack : MonoBehaviour
+public abstract class TowerAttack : TowerBehaviour
 {
-    protected AttackStats attackStats;
     protected Enemy targetedEnemy;
     protected LayerMask enemyLayer;
 
     [SerializeField] protected bool drawDebugLines = true; //If on the tower will draw line to nearest enemy
     [SerializeField] TargetingMode targetingMode = TargetingMode.FIRST;
 
-    public virtual void SetAttackStats(AttackStats attackStats)
+    public override void SetUpTower(AttackStats attackStats, TowerType towerType)
     {
         this.attackStats = attackStats;
+        this.towerType = towerType;
 
         enemyLayer = LayerMask.GetMask("Enemy");
 
@@ -27,7 +26,10 @@ public abstract class TowerAttack : MonoBehaviour
 
     public virtual void TargetEnemy()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, attackStats.range);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, 
+            new Vector2(attackStats.range, attackStats.range) * 2
+            , 0f, enemyLayer);
+
 
         if (hits.Length > 0)
         {
@@ -119,6 +121,18 @@ public abstract class TowerAttack : MonoBehaviour
     public void RaiseRange(float val)
     {
         attackStats.range += val;
+    }
+
+    public void GiveBuff(AttackStats buff)
+    {
+        Debug.Log(attackStats.range);
+        attackStats.AddStats(buff, towerType ==  TowerType.ATTACK_R);
+        Debug.Log(attackStats.range);
+    }
+
+    public void RemoveBuff(AttackStats buff)
+    {
+        attackStats.ReduceStats(buff, towerType == TowerType.ATTACK_R);
     }
 }
 

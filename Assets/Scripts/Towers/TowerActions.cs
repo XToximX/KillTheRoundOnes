@@ -9,6 +9,7 @@ public class TowerActions : MonoBehaviour
     [SerializeField] private GameObject towerRangeIndicator;
 
     private Tower currentTower;
+    private TowerType towerType;
 
     private void Start()
     {
@@ -19,10 +20,15 @@ public class TowerActions : MonoBehaviour
 
     public void OpenTowerActionWheel(Tower tower)
     {
+        currentTower = tower;
+        towerType = tower.towerType;
+
         towerActionWheel.gameObject.SetActive(true);
         towerActionWheel.position = Camera.main.WorldToScreenPoint(tower.transform.position);
 
-        currentTower = tower;
+        if (towerType != TowerType.ATTACK_R)
+            targetingMenu.SetActive(false);
+
 
         ShowTowerRange();
     }
@@ -49,7 +55,7 @@ public class TowerActions : MonoBehaviour
 
     private void ShowTowerRange()
     {
-        float towerRange = currentTower.towerData.AttackStats.range;
+        float towerRange = currentTower.GetComponent<TowerBehaviour>().GetAttackStats().range;
         towerRangeIndicator.transform.position = currentTower.transform.position;
         towerRangeIndicator.transform.localScale = new Vector3(towerRange * 2, towerRange * 2, 1f);
         towerRangeIndicator.SetActive(true);
@@ -57,35 +63,41 @@ public class TowerActions : MonoBehaviour
 
     public void ChangeTargetingMode(string targetingModeName)
     {
+        TowerAttack towerAttackScript = currentTower.GetComponent<TowerAttack>();
+
         switch(targetingModeName)
         {
             case "FIRST":
-                currentTower.ChangeTargetingMode(TargetingMode.FIRST);
+                towerAttackScript.ChangeTargetingMode(TargetingMode.FIRST);
                 break;
 
             case "LAST":
-                currentTower.ChangeTargetingMode(TargetingMode.LAST);
+                towerAttackScript.ChangeTargetingMode(TargetingMode.LAST);
                 break;
 
             case "FURTHEST":
-                currentTower.ChangeTargetingMode(TargetingMode.FURTHEST);
+                towerAttackScript.ChangeTargetingMode(TargetingMode.FURTHEST);
                 break;
 
             case "CLOSEST":
-                currentTower.ChangeTargetingMode(TargetingMode.CLOSEST);
+                towerAttackScript.ChangeTargetingMode(TargetingMode.CLOSEST);
                 break;
 
             case "STRONGEST":
-                currentTower.ChangeTargetingMode(TargetingMode.STRONGEST);
+                towerAttackScript.ChangeTargetingMode(TargetingMode.STRONGEST);
                 break;
 
             case "WEAKEST":
-                currentTower.ChangeTargetingMode(TargetingMode.WEAKEST);
-                break;
-            default:
-                currentTower.ChangeTargetingMode(TargetingMode.FIRST);
+                towerAttackScript.ChangeTargetingMode(TargetingMode.WEAKEST);
                 break;
         }
+
+        HideTowerActionWheel();
+    }
+
+    public void LvlUpTower()
+    {
+        currentTower.GetComponent<TowerUpgrade>().LvlUp();
 
         HideTowerActionWheel();
     }

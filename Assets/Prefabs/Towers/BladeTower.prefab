@@ -160,6 +160,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3518085938932098213, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
+      propertyPath: towerType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4936661634348625680, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
       propertyPath: m_Name
       value: BladeTower
@@ -220,7 +224,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -5562768531262652607, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7930590409411426149, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
@@ -230,6 +235,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4936661634348625680, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1790809810697879132}
+    - targetCorrespondingSourceObject: {fileID: 4936661634348625680, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 983933351716937567}
   m_SourcePrefab: {fileID: 100100000, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
 --- !u!4 &1524132429545416260 stripped
 Transform:
@@ -256,3 +264,15 @@ MonoBehaviour:
   drawDebugLines: 1
   targetingMode: 0
   blade: {fileID: 4973250203989881317}
+--- !u!114 &983933351716937567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4587857620702166577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a9ba5d4aa0c66c45b9c6063971540f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BladeTowerUpgrade

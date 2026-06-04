@@ -4,9 +4,11 @@ public class BladeTowerAttack : TowerAttack
 {
     [SerializeField] GameObject blade;
 
-    public override void SetAttackStats(AttackStats attackStats)
+    public override void SetUpTower(AttackStats attackStats, TowerType towerType)
     {
         this.attackStats = attackStats;
+        this.towerType = towerType;
+
         blade.GetComponent<BladeContact>().damage = attackStats.damage;
 
         enemyLayer = LayerMask.GetMask("Enemy");

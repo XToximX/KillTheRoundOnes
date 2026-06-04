@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_Tower
   name: BladeTower
   towerPrefab: {fileID: 4587857620702166577, guid: ca53f73d265501d43bc87f506144a86b, type: 3}
+  towerType: 1
   AttackStats:
     damage: 2
     range: 2.5

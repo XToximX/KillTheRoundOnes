@@ -6,8 +6,6 @@ public class BladeContact : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Bum");
-
         if(collision.TryGetComponent<Enemy>(out Enemy enemy))
         {
             enemy.TakeDamage(damage);

@@ -1,33 +1,38 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerUpgrade : MonoBehaviour
+public abstract class TowerUpgrade : MonoBehaviour
 {
-    [SerializeField] private SO_Upgrades upgrades;
-
-    private int dmgLvl = 0;
-    private int asLvl = 0;
-    private int rangeLvl = 0;
-
-    private TowerAttack towerAttack;
+    public int CurrentLvl { get; private set; }
 
     private void Start()
     {
-        towerAttack = GetComponent<TowerAttack>();
+        CurrentLvl = 0;
     }
 
-    public void UpgradeDmg()
+    public void LvlUp()
     {
-        if(dmgLvl < 3)
-            towerAttack.RaiseDmg(upgrades.values[++dmgLvl].damage);
+        if(CurrentLvl >= 3)
+        {
+            Debug.Log("Tower is max lvl");
+            return;
+        }
+
+        CurrentLvl++;
+
+        switch(CurrentLvl)
+        {
+            case 1:
+                Lvl1(); break;
+            case 2:
+                Lvl2(); break;
+            case 3:
+                Lvl3(); break;
+        }
     }
-    public void UpgradeAS()
-    {
-        if (asLvl < 3)
-            towerAttack.RaiseAS(upgrades.values[++asLvl].attackSpeed);
-    }
-    public void UpgradeRange()
-    {
-        if (rangeLvl < 3)
-            towerAttack.RaiseRange(-upgrades.values[++rangeLvl].range);
-    }
+
+    protected abstract void Lvl1();
+    protected abstract void Lvl2();
+    protected abstract void Lvl3();
 }
