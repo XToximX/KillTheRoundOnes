@@ -10,7 +10,7 @@ public abstract class TowerAttack : TowerBehaviour
     [SerializeField] protected bool drawDebugLines = true; //If on the tower will draw line to nearest enemy
     [SerializeField] TargetingMode targetingMode = TargetingMode.FIRST;
 
-    WaitForSeconds wait;
+    public WaitForSeconds wait;
 
     public override void SetUpTower(AttackStats attackStats, TowerType towerType)
     {
@@ -86,6 +86,8 @@ public abstract class TowerAttack : TowerBehaviour
 
             targetedEnemy = bestEnemy;
         }
+        else
+            targetedEnemy = null;
     }
 
     protected void DrawDebugLines()

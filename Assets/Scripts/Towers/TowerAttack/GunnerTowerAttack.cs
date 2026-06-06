@@ -1,9 +1,13 @@
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
 public class GunnerTowerAttack : TowerAttack
 {
     [SerializeField] private LineRenderer lineRenderer;
+
+    [SerializeField] private int penetration = 1;
+    private float dmgFalloff = 0.5f;
 
     private void Start()
     {
@@ -25,18 +29,46 @@ public class GunnerTowerAttack : TowerAttack
         if(targetedEnemy != null)
         {
             Vector2 enemyDir = targetedEnemy.transform.position - transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, enemyDir, attackStats.range, enemyLayer);
+            Vector3 shootDir = enemyDir.normalized * attackStats.range;
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, shootDir, attackStats.range, enemyLayer);
 
-            if (hit.collider)
+            if(hits.Count() > 0)
             {
-                hit.collider.GetComponent<Enemy>().TakeDamage(attackStats.damage);
+                int currentDmg = attackStats.damage;
+                int min = penetration < (hits.Count() - 1) ? penetration : (hits.Count() - 1);
+                var curPen = penetration;
+
+                for(int i = 0; i <= min; i++)
+                {
+                    hits[i].collider.GetComponent<Enemy>().TakeDamage(currentDmg);
+                    currentDmg = Mathf.CeilToInt(currentDmg *  dmgFalloff);
+
+                    curPen--;
+                }
 
                 lineRenderer.enabled = true;
-                lineRenderer.SetPosition(1, hit.point);
+
+                if(curPen >= 0)
+                {
+                    lineRenderer.SetPosition(1, transform.position + shootDir);
+                }
+                else
+                    lineRenderer.SetPosition(1, hits[min].point);
+
 
                 Invoke(nameof(DisableLineRenderer), 0.05f);
             }
-        }
+        }       
+    }
+
+    public void SetDamageFallof(float value)
+    {
+        dmgFalloff = value;
+    }
+
+    public void SetPenetration(int value)
+    {
+        penetration = value;
     }
 
     private void DisableLineRenderer()

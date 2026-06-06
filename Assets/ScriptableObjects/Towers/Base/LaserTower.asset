@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_Tower
   name: Laser
   towerPrefab: {fileID: 4688814261755269047, guid: 6f34854149ce68d45bf5bd47840b69e2, type: 3}
+  cost: 200
   towerType: 0
   AttackStats:
-    damage: 0
+    damage: 2
     range: 5
     attackSpeed: 5

@@ -29,20 +29,30 @@ public class InputController : MonoBehaviour
         input = new InputSystem_Actions();
 
         mouseInteractLayer = LayerMask.GetMask("TowerSlot", "Enemy");
+
+        input.Gameplay.LClick.performed += OnLeftClick;
+        input.Gameplay.RClick.performed += OnRightClick;
     }
 
     private void OnEnable()
     {
         input.Gameplay.Enable();
+    }
 
-        input.Gameplay.LClick.performed += OnLeftClick;
-        input.Gameplay.RClick.performed += (callback) => OnEmptyClick?.Invoke();
+    private void OnDisable()
+    {
+        input.Gameplay.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        input.Gameplay.LClick.performed -= OnLeftClick;
+        input.Gameplay.RClick.performed -= OnRightClick;
     }
 
     private void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject() != isMouseOverUI)
-            isMouseOverUI = !isMouseOverUI;
+        isMouseOverUI = EventSystem.current.IsPointerOverGameObject();
     }
 
     private void OnLeftClick(InputAction.CallbackContext callback)
@@ -79,5 +89,10 @@ public class InputController : MonoBehaviour
         }
         else
             OnEmptyClick?.Invoke();
+    }
+
+    private void OnRightClick(InputAction.CallbackContext callback)
+    {
+        OnEmptyClick?.Invoke();
     }
 }

@@ -7,6 +7,13 @@ public class SupportTowerUpgrade : TowerUpgrade
 
     SupportTower supportTower;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        supportTower = GetComponent<SupportTower>();
+    }
+
 
     protected override void Lvl1()
     {
@@ -16,11 +23,11 @@ public class SupportTowerUpgrade : TowerUpgrade
     protected override void Lvl2()
     {
         
-        GetComponent<SupportTower>().SlowValue = lvl2SlowValue;
+        supportTower.SlowValue = lvl2SlowValue;
     }
 
     protected override void Lvl3()
     {
-        GetComponent<SupportTower>().InvokeRepeating("UpdateBuffs", 0f, 0.5f);
+        supportTower.InvokeRepeating("UpdateBuffs", 0f, 0.5f);
     }
 }

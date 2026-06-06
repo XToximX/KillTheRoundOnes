@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4942973532564132113, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
       propertyPath: m_SortingOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7930590409411426149, guid: d06dd2cc308a8be498d8d712ff6a2ae0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -135,7 +135,7 @@ LineRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -213,6 +213,7 @@ MonoBehaviour:
   drawDebugLines: 0
   targetingMode: 0
   lineRenderer: {fileID: 355201840465183137}
+  penetration: 1
 --- !u!114 &-3043454754072217095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,3 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea13b7615308d0459fb9b008f1cf5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunnerTowerUpgrade
+  LvlCosts: 640000006400000064000000
+  lvl2AttackStats:
+    damage: 3
+    range: 0
+    attackSpeed: 2

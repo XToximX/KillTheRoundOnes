@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_Tower
   name: Suppert
   towerPrefab: {fileID: 4995124935222668433, guid: 1c2fb8164ead67942903e7bbdde440ee, type: 3}
+  cost: 200
   towerType: 2
   AttackStats:
     damage: 0

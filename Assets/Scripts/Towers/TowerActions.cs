@@ -104,11 +104,22 @@ public class TowerActions : MonoBehaviour
 
     public void LvlUpTower()
     {
-        currentTower.GetComponent<TowerUpgrade>().LvlUp();
-        ShowTowerLevel();
+        TowerUpgrade towerUpgrade = currentTower.GetComponent<TowerUpgrade>();
 
-        if(towerType != TowerType.ATTACK_M)
-            ShowTowerRange();
+        if (!towerUpgrade.isMaxLvl())
+        {
+            int upgradeCost = towerUpgrade.LvlCosts[towerUpgrade.CurrentLvl];
+
+            if(ResourcesManager.I.Buy(upgradeCost, towerUpgrade.LvlUp))
+            {
+                ShowTowerLevel();
+
+                if(towerType != TowerType.ATTACK_M)
+                    ShowTowerRange();
+
+                currentTower.AddToTotalCost(upgradeCost);
+            }
+        }
         //HideTowerActionWheel();
     }
 

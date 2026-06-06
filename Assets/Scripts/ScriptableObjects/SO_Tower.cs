@@ -5,13 +5,15 @@ public class SO_Tower : ScriptableObject
 {
     [SerializeField] new string name;
     [SerializeField] GameObject towerPrefab;
-    
+    [SerializeField] int cost;
 
     public string Name => name;
     public TowerType towerType;
+    
 
     public GameObject TowerPrefab => towerPrefab;
     public AttackStats AttackStats;
+    public int Cost => cost;
 }
 
 [System.Serializable]

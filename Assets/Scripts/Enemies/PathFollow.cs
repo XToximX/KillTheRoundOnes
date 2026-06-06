@@ -37,7 +37,9 @@ public class PathFollow : MonoBehaviour
             distanceTravelled += distance;
         }
         else
-            GetComponent<Enemy>().DestroyEnemy();
+        {
+            enemy.PathEnd();
+        }
     }
 
     public void StartFollowingPath()

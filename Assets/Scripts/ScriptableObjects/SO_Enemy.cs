@@ -7,9 +7,13 @@ public class SO_Enemy : ScriptableObject
     [SerializeField] Color color;
     [SerializeField] float speed;
     [SerializeField] int hp;
+    [SerializeField] int dmg;
+    [SerializeField] int coinValue;
 
     public string Name => name;
     public Color Color => color;
     public float Speed => speed;
     public int HP => hp;
+    public int Dmg => dmg;
+    public int CoinValue => coinValue;
 }

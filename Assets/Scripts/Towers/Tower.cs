@@ -9,6 +9,8 @@ public class Tower : MonoBehaviour
 
     public TowerType towerType;
 
+    public int totalCost = 0;
+
     private void Awake()
     {
         if(GetComponent<TowerUpgrade>() == null)
@@ -22,6 +24,8 @@ public class Tower : MonoBehaviour
         this.towerData = towerData;
 
         towerType = towerData.towerType;
+        totalCost += towerData.Cost;
+
         towerBehavoiur = GetComponent<TowerBehaviour>();
         towerBehavoiur.SetUpTower(towerData.AttackStats, towerType);
     }
@@ -33,10 +37,16 @@ public class Tower : MonoBehaviour
         if (towerType == TowerType.SUPPORT)
             GetComponent<SupportTower>().ClearBuffs();
 
+        ResourcesManager.I.AddCoins(totalCost / 2);
+
         Destroy(gameObject);
         return;
     }
 
+    public void AddToTotalCost(int value)
+    {
+        totalCost += value;
+    }
 }
 
 public enum TowerType

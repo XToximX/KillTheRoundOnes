@@ -95,8 +95,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SupportTower
   buffStats:
     damage: 1
-    range: 2
-    attackSpeed: 2
+    range: 1
+    attackSpeed: 1
   SlowValue: 0.15
 --- !u!114 &1181831033617614554
 MonoBehaviour:
@@ -110,8 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3f49d23bfa9c14393292a75dc42583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SupportTowerUpgrade
+  LvlCosts: 000000000000000000000000
   lvl1AttackStats:
     damage: 0
     range: 1
     attackSpeed: 0
-  lvl2SlowValue: 0.25
+  lvl2SlowValue: 0.3

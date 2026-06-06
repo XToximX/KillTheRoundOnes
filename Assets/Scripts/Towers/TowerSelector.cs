@@ -21,9 +21,9 @@ public class TowerSelector : MonoBehaviour
     }
 
     public void PickTower(SO_Tower towerData)
-    {
-        currentTowerSlot.PlaceTower(towerData);
-        HideShop();
+    { 
+        if (ResourcesManager.I.Buy(towerData.Cost, () => currentTowerSlot.PlaceTower(towerData)))
+            HideShop();
     }
 
     public void HideShop()

@@ -1,13 +1,14 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class TowerUpgrade : MonoBehaviour
 {
-    public int CurrentLvl { get; private set; }
+    public int[] LvlCosts = new int[3];
+
+    [HideInInspector] public int CurrentLvl { get; private set; }
     protected TowerBehaviour towerBehaviour;
 
-    private void Start()
+    protected virtual void Start()
     {
         towerBehaviour = GetComponent<TowerBehaviour>();
 
@@ -38,4 +39,11 @@ public abstract class TowerUpgrade : MonoBehaviour
     protected abstract void Lvl1();
     protected abstract void Lvl2();
     protected abstract void Lvl3();
+
+    public bool isMaxLvl()
+    {
+        if(CurrentLvl < 3)
+            return false;
+        return true;
+    }
 }

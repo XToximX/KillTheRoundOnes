@@ -11,6 +11,9 @@ public class Path : MonoBehaviour
 
     public Action PathCreated;
 
+    [Space]
+    [SerializeField] LineRenderer lineRenderer;
+
 
     [Header("Debug")]
     [SerializeField] private bool drawGizmos = true;
@@ -29,7 +32,12 @@ public class Path : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //PathCreated();
+        lineRenderer.positionCount = pathPoints.Count;
+
+        for (int i = 0; i < pathPoints.Count; i++)
+        {
+            lineRenderer.SetPosition(i, pathPoints[i].position);
+        }
     }
 
     // Update is called once per frame

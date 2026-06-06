@@ -16,3 +16,5 @@ MonoBehaviour:
   color: {r: 1, g: 0, b: 0.06569576, a: 1}
   speed: 2
   hp: 10
+  dmg: 0
+  coinValue: 50

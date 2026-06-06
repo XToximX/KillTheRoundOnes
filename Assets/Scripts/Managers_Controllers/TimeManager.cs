@@ -13,6 +13,8 @@ public class TimeManager : MonoBehaviour
         }
 
         I = this;
+
+        Time.timeScale = 1.0f;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,5 +39,13 @@ public class TimeManager : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
+    }
+
+    public void PauseTime(bool val)
+    {
+        if (val)
+            Time.timeScale = 0f;
+        else
+            Time.timeScale = 1f;
     }
 }

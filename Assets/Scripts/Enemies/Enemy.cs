@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent (typeof(PathFollow))]
@@ -74,6 +75,15 @@ public class Enemy : MonoBehaviour
     public void DestroyEnemy()
     {
         EnemyManager.I.Unregister(gameObject);
+        ResourcesManager.I.AddCoins(enemyData.CoinValue);
+        Destroy(gameObject);
+        return;
+    }
+
+    public void PathEnd()
+    {
+        EnemyManager.I.Unregister(gameObject);
+        ResourcesManager.I.TakeDamage(enemyData.Dmg);
         Destroy(gameObject);
         return;
     }
