@@ -5070,13 +5070,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserTowerUpgrade
   LvlUpCosts: 010000000300000005000000
-  lvl1AttackStats:
+  lvl1BonusStats:
     damage: 1
     range: 0.5
     attackSpeed: 0
-  lvl2AttackStats:
-    damage: 1
+  lvl2BonusStats:
+    damage: 2
     range: 0.5
+    attackSpeed: 0
+  lvl3BonusStats:
+    damage: 0
+    range: 0
     attackSpeed: 0
 --- !u!4 &7755081833167263682 stripped
 Transform:

@@ -91,7 +91,7 @@ public class ResourcesManager : MonoBehaviour
 
     private void Death()
     {
-        TimeManager.I.PauseTime(true);
+        TimeManager.I.PauseTime();
         InputController.I.DisableInput();
         deathCanva.SetActive(true);
     }

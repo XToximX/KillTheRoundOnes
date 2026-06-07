@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class BladeTowerUpgrade : TowerUpgrade
 {
-    [SerializeField] AttackStats lvl1BonusStats;
-    [SerializeField] AttackStats lvl2BonusStats;
+    
     [SerializeField] GameObject lvl3Blade;
 
     protected override void Lvl1()
@@ -19,6 +18,7 @@ public class BladeTowerUpgrade : TowerUpgrade
 
     protected override void Lvl3()
     {
+        towerBehaviour.PernamentAddStats(lvl3BonusStats);
         lvl3Blade.SetActive(true);
     }
 }

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
     //Stats
     private float hp;
+    private float baseHp;
     public float Speed;
     private float baseSpeed;
     private SO_Enemy enemyData;
@@ -14,6 +16,7 @@ public class Enemy : MonoBehaviour
     private float currentDebuff = 0f;
 
     public float HP => hp;
+    public float BaseHP => baseHp;
 
     public PathFollow PathFollow { get; private set; }
 
@@ -38,6 +41,7 @@ public class Enemy : MonoBehaviour
         sr.color = enemyData.Color;
 
         hp = enemyData.HP * EnemyManager.I.GlobalHPMultiplyer;
+        baseHp = hp;
         Speed = enemyData.Speed;
         baseSpeed = Speed;
         PathFollow.StartFollowingPath();

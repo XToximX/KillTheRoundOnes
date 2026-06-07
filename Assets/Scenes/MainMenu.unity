@@ -1104,7 +1104,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Author: Tomasz Lech'
+  m_text: 'Author: Tomasz Lech
+
+    Music: Dominik Jeziorek'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d43d7b1f38bc4964494057e6344ed157, type: 2}
   m_sharedMaterial: {fileID: -9120047822732079564, guid: d43d7b1f38bc4964494057e6344ed157, type: 2}
@@ -1139,7 +1141,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1

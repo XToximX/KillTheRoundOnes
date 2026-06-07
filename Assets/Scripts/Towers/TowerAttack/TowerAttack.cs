@@ -64,11 +64,11 @@ public abstract class TowerAttack : TowerBehaviour
                         break;
 
                     case TargetingMode.STRONGEST:
-                        value = enemy.HP * 1000 + enemy.PathFollow.distanceTravelled;
+                        value = enemy.BaseHP * 1000 + enemy.PathFollow.distanceTravelled;
                         break;
 
                     case TargetingMode.WEAKEST:
-                        value = -enemy.HP * 1000 + enemy.PathFollow.distanceTravelled;
+                        value = -enemy.BaseHP * 1000 + enemy.PathFollow.distanceTravelled;
                         break;
 
                     default:

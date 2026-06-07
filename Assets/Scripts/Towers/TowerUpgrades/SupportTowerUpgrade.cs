@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class SupportTowerUpgrade : TowerUpgrade
 {
-    [SerializeField] AttackStats lvl1AttackStats;
     [SerializeField] float lvl2SlowValue;
 
     SupportTower supportTower;
@@ -17,7 +16,7 @@ public class SupportTowerUpgrade : TowerUpgrade
 
     protected override void Lvl1()
     {
-        towerBehaviour.PernamentAddStats(lvl1AttackStats);
+        towerBehaviour.PernamentAddStats(lvl1BonusStats);
     }
 
     protected override void Lvl2()

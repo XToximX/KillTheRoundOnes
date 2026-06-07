@@ -227,11 +227,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunnerTowerUpgrade
   LvlUpCosts: 010000000300000005000000
-  lvl1AttackStats:
+  lvl1BonusStats:
+    damage: 1
+    range: 0.25
+    attackSpeed: 0
+  lvl2BonusStats:
     damage: 1
     range: 0
     attackSpeed: 1
-  lvl2AttackStats:
+  lvl3BonusStats:
     damage: 2
     range: 0.25
     attackSpeed: 1

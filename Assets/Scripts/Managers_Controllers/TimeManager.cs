@@ -3,6 +3,7 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     public static TimeManager I;
+    private bool isPaused;
 
     private void Awake()
     {
@@ -31,21 +32,30 @@ public class TimeManager : MonoBehaviour
 
     private void OnApplicationFocus(bool hasFocus)
     {
-        if (!hasFocus)
+        if(!isPaused)
         {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
+            if (!hasFocus)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
         }
     }
 
-    public void PauseTime(bool val)
+    public void PauseTime()
     {
-        if (val)
+        if (!isPaused)
+        {
             Time.timeScale = 0f;
+            isPaused = true;
+        }
         else
+        {
+            isPaused = false;
             Time.timeScale = 1f;
+        }
     }
 }

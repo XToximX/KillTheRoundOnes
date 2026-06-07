@@ -47,7 +47,7 @@ public class EnemyManager : MonoBehaviour
     {
         GlobalHPMultiplyer = Mathf.Min(
             4f,
-            Mathf.Pow(1.05f, WavesManager.I.CurrentWave)
+            Mathf.Pow(1.06f, WavesManager.I.CurrentWave)
             );
     }
 }

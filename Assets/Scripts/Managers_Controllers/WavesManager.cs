@@ -5,6 +5,7 @@ using System;
 using TMPro;
 
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class WavesManager : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class WavesManager : MonoBehaviour
     private int currentWave = 0;
 
     [SerializeField] private TextMeshProUGUI waveDisplay;
+    [SerializeField] private Image waveUIButton;
+    [SerializeField] private Sprite[] buttonSprites; //0 play - 1 pause
+    private bool currentsprite = false;
 
     public int CurrentWave => currentWave;
     public bool IsWaveInProgress => isWaveInProgress;
@@ -54,8 +58,8 @@ public class WavesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && !isWaveInProgress)
-            StartWave();
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            OnButtonPressed();
     }
 
     public void StartWave()
@@ -63,9 +67,9 @@ public class WavesManager : MonoBehaviour
         isWaveInProgress = true;
         currentWave++;
         UpdateWaveDisplay();
+        SwitchButtonSprite();
 
         OnWaveStart?.Invoke(enemiesInWave);
-
     }
 
     public void EndWave()
@@ -73,9 +77,10 @@ public class WavesManager : MonoBehaviour
         isWaveInProgress = false;
         GenerateWave(currentWave + 1);
         ResourcesManager.I.AddCoins(1);
+        SwitchButtonSprite();
+
 
         OnWaveEnd?.Invoke();
-
     }
 
     private void GenerateWave(int waveIndex)
@@ -83,7 +88,7 @@ public class WavesManager : MonoBehaviour
         int budget = Mathf.RoundToInt(
             5 + 
             waveIndex * 2 + 
-            Mathf.Pow(waveIndex, 1.25f)
+            Mathf.Pow(waveIndex, 1.1f)
             );
 
 
@@ -112,7 +117,7 @@ public class WavesManager : MonoBehaviour
 
         float randomWeight = Random.Range(0, totalWeight);
 
-        int current = 0;
+        float current = 0;
 
         foreach(var e in enemies)
         {
@@ -128,5 +133,31 @@ public class WavesManager : MonoBehaviour
     private void UpdateWaveDisplay()
     {
         waveDisplay.text = $"Wave: {currentWave}";
+    }
+
+    public void PauseWave()
+    {
+        SwitchButtonSprite();
+        TimeManager.I.PauseTime();
+    }
+
+    private void SwitchButtonSprite()
+    {
+        if (currentsprite)
+        {
+            waveUIButton.sprite = buttonSprites[0];
+        }
+        else
+            waveUIButton.sprite = buttonSprites[1];
+
+        currentsprite = !currentsprite;
+    }
+
+    public void OnButtonPressed()
+    {
+        if (!isWaveInProgress)
+            StartWave();
+        else
+            PauseWave();
     }
 }

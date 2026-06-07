@@ -19,7 +19,8 @@ public class SO_Enemy : ScriptableObject
     [SerializeField] int minWave;
 
     [Range(1f, 100f)]
-    [SerializeField] private int spawnWeight = 1;
+    [SerializeField] private float spawnWeight = 1;
+    [SerializeField] private AnimationCurve weightCurve;
 
 
     public string Name => name;
@@ -31,5 +32,5 @@ public class SO_Enemy : ScriptableObject
     public float Size => size;
     public int WaveCost => waveCost;
     public int MinWave => minWave;
-    public int SpawnWeight => spawnWeight;
+    public float SpawnWeight => spawnWeight * weightCurve.Evaluate(WavesManager.I.CurrentWave);
 }

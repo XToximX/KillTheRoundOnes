@@ -65,15 +65,10 @@ public class LaserTowerAttack : TowerAttack
 
                 if (targetedEnemy == lastTarget)
                 {
-                    if (dmgRampTime < 0.5f)
-                        dmgRampMult = 1f;
-                    else if (dmgRampTime < 1f)
-                        dmgRampMult = 1.5f;
-                    else
-                        dmgRampMult = 2f;
-
                     dmgRampTime += (1f / attackStats.attackSpeed);
-                    emission.rateOverTimeMultiplier = baseEmissionRate * dmgRampMult * 5f;
+                    dmgRampMult = 1f + Mathf.Min(dmgRampTime, 2f);
+
+                    emission.rateOverTimeMultiplier = baseEmissionRate * dmgRampMult * 2f;
                 }
                 else
                 {
@@ -87,7 +82,7 @@ public class LaserTowerAttack : TowerAttack
             }
 
             //Debug.Log($"{dmgRampTime}, {dmgRampMult}");
-            targetedEnemy.TakeDamage(Mathf.CeilToInt(attackStats.damage * dmgRampMult));
+            targetedEnemy.TakeDamage(attackStats.damage * dmgRampMult);
         }
     }
 

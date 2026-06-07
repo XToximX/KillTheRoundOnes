@@ -468,6 +468,10 @@ MonoBehaviour:
     attackSpeed: 0
   lvl2BonusStats:
     damage: 2
-    range: 0.25
+    range: 0.5
     attackSpeed: 0
+  lvl3BonusStats:
+    damage: 1
+    range: 0
+    attackSpeed: 0.25
   lvl3Blade: {fileID: 499310071579379215}

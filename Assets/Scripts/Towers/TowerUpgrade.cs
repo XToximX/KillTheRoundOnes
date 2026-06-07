@@ -6,6 +6,10 @@ public abstract class TowerUpgrade : MonoBehaviour
     //public int[] LvlCostsOld = new int[3];
     public int[] LvlUpCosts = { 1, 3, 5 };
 
+    [SerializeField] protected AttackStats lvl1BonusStats;
+    [SerializeField] protected AttackStats lvl2BonusStats;
+    [SerializeField] protected AttackStats lvl3BonusStats;
+
     [HideInInspector] public int CurrentLvl { get; private set; }
     protected TowerBehaviour towerBehaviour;
 

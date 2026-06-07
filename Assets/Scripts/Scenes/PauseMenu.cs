@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         isGamePaused = !isGamePaused;
-        TimeManager.I.PauseTime(isGamePaused);
+        TimeManager.I.PauseTime();
         pauseCanva.SetActive(isGamePaused);
     }
 
