@@ -3,7 +3,8 @@ using UnityEngine;
 
 public abstract class TowerUpgrade : MonoBehaviour
 {
-    public int[] LvlCosts = new int[3];
+    //public int[] LvlCostsOld = new int[3];
+    public int[] LvlUpCosts = { 1, 3, 5 };
 
     [HideInInspector] public int CurrentLvl { get; private set; }
     protected TowerBehaviour towerBehaviour;

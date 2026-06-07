@@ -461,13 +461,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a9ba5d4aa0c66c45b9c6063971540f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BladeTowerUpgrade
-  LvlCosts: 320000006400000064000000
+  LvlUpCosts: 010000000300000005000000
   lvl1BonusStats:
-    damage: 5
-    range: 0.5
-    attackSpeed: 0.25
+    damage: 1
+    range: 0
+    attackSpeed: 0
   lvl2BonusStats:
-    damage: 5
-    range: 0.5
-    attackSpeed: 0.25
+    damage: 2
+    range: 0.25
+    attackSpeed: 0
   lvl3Blade: {fileID: 499310071579379215}

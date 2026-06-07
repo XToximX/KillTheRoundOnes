@@ -5,29 +5,39 @@ using System.Collections.Generic;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject enemyPrefab;
+    private float spawnInterval = 0.5f;
 
-    private void Start()
+    private void OnEnable()
     {
         WavesManager.I.OnWaveStart += SpawnWave;
     }
 
-    public void SpawnWave(SO_Wave wave)
+    private void OnDisable()
+    {
+        WavesManager.I.OnWaveStart -= SpawnWave;
+    }
+
+    public void SpawnWave(List<SO_Enemy> wave)
     {
         StartCoroutine(SpawnEnemies(wave));
     }
 
-    private IEnumerator SpawnEnemies(SO_Wave wave)
+    private IEnumerator SpawnEnemies(List<SO_Enemy> wave)
     {
-        WaitForSeconds waitForSeconds = new WaitForSeconds(wave.SpawnInterval);
+        EnemyManager.I.isSpawningWave = true;
 
-        foreach(var row in wave.EnemyList)
+        WaitForSeconds waitForSeconds = new WaitForSeconds(spawnInterval);
+
+        if(wave.Count > 0)
         {
-            for(int i = 0; i < row.Count; i++)
+            foreach(var e in wave)
             {
-                var e = Instantiate(enemyPrefab);
-                e.GetComponent<Enemy>().SetUp(row.EnemyData);
+                var enemy = Instantiate(enemyPrefab);
+                enemy.GetComponent<Enemy>().SetUp(e);
                 yield return waitForSeconds;
             }
         }
+
+        EnemyManager.I.isSpawningWave = false;
     }
 }

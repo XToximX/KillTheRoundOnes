@@ -95,4 +95,9 @@ public class InputController : MonoBehaviour
     {
         OnEmptyClick?.Invoke();
     }
+
+    public void DisableInput()
+    {
+        input.Gameplay.Disable();
+    }
 }

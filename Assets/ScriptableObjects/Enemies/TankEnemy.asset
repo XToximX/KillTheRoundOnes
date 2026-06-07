@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: TankEnemy
   m_EditorClassIdentifier: Assembly-CSharp::SO_Enemy
   name: Tank
-  color: {r: 1, g: 0, b: 0.06569576, a: 1}
-  speed: 2
-  hp: 10
-  dmg: 0
-  coinValue: 50
+  color: {r: 0, g: 0.6282296, b: 1, a: 1}
+  deathClip: {fileID: 8300000, guid: 6d48ecf3676c1df45850a53f3c1b7775, type: 3}
+  speed: 1.5
+  hp: 50
+  dmg: 5
+  size: 1.25
+  waveCost: 20
+  minWave: 15
+  spawnWeight: 10

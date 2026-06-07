@@ -3,6 +3,7 @@ using UnityEngine;
 public class BladeTowerAttack : TowerAttack
 {
     [SerializeField] Transform bladesCenter;
+    private int rotationDir = -1;
 
     public override void SetUpTower(AttackStats attackStats, TowerType towerType)
     {
@@ -18,7 +19,7 @@ public class BladeTowerAttack : TowerAttack
     void Update()
     {
         float rotationSpeed = 360f / (1f / attackStats.attackSpeed);
-        bladesCenter.transform.Rotate(0f, 0f, -rotationSpeed * Time.deltaTime);
+        bladesCenter.transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime * rotationDir);
     }
 
     public void SetBlades()
@@ -32,5 +33,10 @@ public class BladeTowerAttack : TowerAttack
     protected override void HandleAttack()
     {
         return;
+    }
+
+    public void ChangerRotationDir(int i)
+    {
+        rotationDir = i;
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using System.Linq;
 
 public class AudioManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class AudioManager : MonoBehaviour
     public float MusicVolume => musicVolume;
     public float SFXVolume => sfxVolume;
 
+    [SerializeField] private AudioSource[] sfxSources = new AudioSource[5];
+    private int index = 0;
 
     private void Awake()
     {
@@ -62,5 +65,17 @@ public class AudioManager : MonoBehaviour
 
         float db = Mathf.Log10(value) * 20f;
         audioMixer.SetFloat("SFX", db);
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        var source = sfxSources[index];
+        
+        source.clip = clip;
+        source.pitch = Random.Range(0.95f, 1.05f);
+
+        source.Play();
+
+        index = (index + 1) % sfxSources.Count();
     }
 }

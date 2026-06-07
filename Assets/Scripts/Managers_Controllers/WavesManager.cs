@@ -1,21 +1,33 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
 using UnityEngine.InputSystem;
+using System;
+using TMPro;
+
+using Random = UnityEngine.Random;
 
 public class WavesManager : MonoBehaviour
 {
     public static WavesManager I;
 
+    [SerializeField] private List<SO_Enemy> enemyPool;
+    private List<SO_Enemy> enemiesInWave = new();
+
     //Wave actions
-    public event Action<SO_Wave> OnWaveStart;
+    public event Action<List<SO_Enemy>> OnWaveStart;
     public event Action OnWaveEnd;
 
-    [SerializeField] List<SO_Wave> waves = new List<SO_Wave>();
-
     private bool isWaveInProgress = false;
-    private int currentWaveNumber = 0;
+    private int currentWave = 0;
 
+    [SerializeField] private TextMeshProUGUI waveDisplay;
+
+    public int CurrentWave => currentWave;
+    public bool IsWaveInProgress => isWaveInProgress;
+
+    [Header("ForDebug")]
+    [SerializeField] bool debuging = false;
+    [SerializeField] int startingWave;
 
     private void Awake()
     {
@@ -31,23 +43,90 @@ public class WavesManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        OnWaveStart += (wave) => isWaveInProgress = true;
-        OnWaveEnd += () => isWaveInProgress = false;
+        EnemyManager.I.OnAllEnemiesDead += EndWave;
 
-        EnemyManager.I.OnAllEnemiesDead += () => OnWaveEnd?.Invoke();
+        if (debuging)
+            currentWave = startingWave;
+
+        GenerateWave(currentWave + 1);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame && !isWaveInProgress)
-            StartNextWave();
+            StartWave();
     }
 
-    public void StartNextWave()
+    public void StartWave()
     {
-        OnWaveStart?.Invoke(waves[currentWaveNumber]);
-        if (currentWaveNumber <  waves.Count - 1)
-            currentWaveNumber++; // wave cap so it wont go out of index
+        isWaveInProgress = true;
+        currentWave++;
+        UpdateWaveDisplay();
+
+        OnWaveStart?.Invoke(enemiesInWave);
+
+    }
+
+    public void EndWave()
+    {
+        isWaveInProgress = false;
+        GenerateWave(currentWave + 1);
+        ResourcesManager.I.AddCoins(1);
+
+        OnWaveEnd?.Invoke();
+
+    }
+
+    private void GenerateWave(int waveIndex)
+    {
+        int budget = Mathf.RoundToInt(
+            5 + 
+            waveIndex * 2 + 
+            Mathf.Pow(waveIndex, 1.25f)
+            );
+
+
+        List<SO_Enemy> validEnemies = enemyPool.FindAll(e => e.MinWave <= waveIndex);
+        enemiesInWave.Clear();
+
+        while(budget > 0)
+        {
+            List<SO_Enemy> affordable = validEnemies.FindAll(e => e.WaveCost <= budget);
+
+            if (affordable.Count == 0)
+                break;
+
+            var weightedEnemy = GetWeightEnemy(affordable);
+            enemiesInWave.Add(weightedEnemy);
+            budget -= weightedEnemy.WaveCost;
+        }
+    }
+
+    private SO_Enemy GetWeightEnemy(List<SO_Enemy> enemies)
+    {
+        float totalWeight = 0;
+
+        foreach (var e in enemies)
+            totalWeight += e.SpawnWeight;
+
+        float randomWeight = Random.Range(0, totalWeight);
+
+        int current = 0;
+
+        foreach(var e in enemies)
+        {
+            current += e.SpawnWeight;
+
+            if (randomWeight <= current)
+                return e;
+        }
+
+        return enemies[0];
+    }
+
+    private void UpdateWaveDisplay()
+    {
+        waveDisplay.text = $"Wave: {currentWave}";
     }
 }

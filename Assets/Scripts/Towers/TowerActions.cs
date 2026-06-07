@@ -5,7 +5,10 @@ public class TowerActions : MonoBehaviour
 {
     [SerializeField] private Transform towerActionWheel;
     [SerializeField] private GameObject targetingMenu;
+    [SerializeField] private GameObject targetingMenuBlade;
     [SerializeField] private GameObject towerRangeIndicator;
+
+    private bool isTargetingMenuActive = false;
 
     [Header("Level indicator")]
     [SerializeField] Sprite emptyLvlSprite;
@@ -20,7 +23,9 @@ public class TowerActions : MonoBehaviour
     {
         InputController.I.OnEmptyClick += HideTowerActionWheel;
         InputController.I.OnInteracted += HideTowerActionWheel;
+
         targetingMenu.SetActive(false);
+        targetingMenuBlade.SetActive(false);
     }
 
     public void OpenTowerActionWheel(Tower tower)
@@ -32,9 +37,6 @@ public class TowerActions : MonoBehaviour
         towerActionWheel.position = Camera.main.WorldToScreenPoint(tower.transform.position);
 
         ShowTowerLevel();
-
-        if (towerType != TowerType.ATTACK_R)
-            targetingMenu.SetActive(false);
 
         if(towerType != TowerType.ATTACK_M)
             ShowTowerRange();
@@ -49,6 +51,9 @@ public class TowerActions : MonoBehaviour
     public void HideTowerActionWheel()
     {
         targetingMenu.SetActive(false);
+        targetingMenuBlade.SetActive(false);
+        isTargetingMenuActive = false;
+
         towerActionWheel.gameObject.SetActive(false);
         towerRangeIndicator.SetActive(false);
 
@@ -57,7 +62,25 @@ public class TowerActions : MonoBehaviour
 
     public void ShowTargetingMenu()
     {
-        targetingMenu.SetActive(true);
+        if (!isTargetingMenuActive)
+        {
+            switch (currentTower.towerType)
+            {
+                case TowerType.ATTACK_R:
+                    targetingMenu.SetActive(true);
+                    break;
+                case TowerType.ATTACK_M:
+                    targetingMenuBlade.SetActive(true);
+                    break;
+            }
+        }
+        else
+        {
+            targetingMenu.SetActive(false);
+            targetingMenuBlade.SetActive(false);
+        }
+
+        isTargetingMenuActive = !isTargetingMenuActive;
     }
 
     private void ShowTowerRange()
@@ -97,6 +120,12 @@ public class TowerActions : MonoBehaviour
             case "WEAKEST":
                 towerAttackScript.ChangeTargetingMode(TargetingMode.WEAKEST);
                 break;
+            case "RIGHT":
+                currentTower.GetComponent<BladeTowerAttack>().ChangerRotationDir(-1);
+                break;
+            case "LEFT":
+                currentTower.GetComponent<BladeTowerAttack>().ChangerRotationDir(1);
+                break;
         }
 
         HideTowerActionWheel();
@@ -108,7 +137,7 @@ public class TowerActions : MonoBehaviour
 
         if (!towerUpgrade.isMaxLvl())
         {
-            int upgradeCost = towerUpgrade.LvlCosts[towerUpgrade.CurrentLvl];
+            int upgradeCost = towerUpgrade.LvlUpCosts[towerUpgrade.CurrentLvl];
 
             if(ResourcesManager.I.Buy(upgradeCost, towerUpgrade.LvlUp))
             {
@@ -120,7 +149,8 @@ public class TowerActions : MonoBehaviour
                 currentTower.AddToTotalCost(upgradeCost);
             }
         }
-        //HideTowerActionWheel();
+
+        HideTowerActionWheel();
     }
 
     private void ShowTowerLevel()

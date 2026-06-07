@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: RegularEnemy
   m_EditorClassIdentifier: Assembly-CSharp::SO_Enemy
   name: Regular
-  color: {r: 1, g: 1, b: 1, a: 1}
-  speed: 3
-  hp: 20
-  dmg: 10
-  coinValue: 10
+  color: {r: 1, g: 0.8644319, b: 0.2688679, a: 1}
+  deathClip: {fileID: 8300000, guid: 6d48ecf3676c1df45850a53f3c1b7775, type: 3}
+  speed: 2.5
+  hp: 10
+  dmg: 1
+  size: 1
+  waveCost: 1
+  minWave: 1
+  spawnWeight: 50

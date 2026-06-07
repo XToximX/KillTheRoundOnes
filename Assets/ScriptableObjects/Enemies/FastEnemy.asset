@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_Enemy
   name: Fast
   color: {r: 0.15496778, g: 1, b: 0, a: 1}
-  speed: 6
-  hp: 2
-  dmg: 0
-  coinValue: 25
+  deathClip: {fileID: 8300000, guid: 6d48ecf3676c1df45850a53f3c1b7775, type: 3}
+  speed: 5
+  hp: 12
+  dmg: 2
+  size: 0.75
+  waveCost: 5
+  minWave: 5
+  spawnWeight: 25

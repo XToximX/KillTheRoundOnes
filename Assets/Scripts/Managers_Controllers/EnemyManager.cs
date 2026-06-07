@@ -10,6 +10,10 @@ public class EnemyManager : MonoBehaviour
 
     private List<GameObject> enemiesLiving = new List<GameObject>();
 
+    public bool isSpawningWave = false;
+
+    public float GlobalHPMultiplyer = 1f;
+
     private void Awake()
     {
         if (I != null && I != this)
@@ -21,6 +25,11 @@ public class EnemyManager : MonoBehaviour
         I = this;
     }
 
+    private void Start()
+    {
+        WavesManager.I.OnWaveEnd += CalculateHPMulitier;
+    }
+
     public void Register(GameObject enemy)
     {
         enemiesLiving.Add(enemy);
@@ -30,8 +39,15 @@ public class EnemyManager : MonoBehaviour
     {
         enemiesLiving.Remove(enemy);
 
-        if (enemiesLiving.Count == 0)
+        if (enemiesLiving.Count == 0 && !isSpawningWave)
             OnAllEnemiesDead?.Invoke();
     }
 
+    private void CalculateHPMulitier()
+    {
+        GlobalHPMultiplyer = Mathf.Min(
+            4f,
+            Mathf.Pow(1.05f, WavesManager.I.CurrentWave)
+            );
+    }
 }

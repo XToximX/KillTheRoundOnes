@@ -5,7 +5,7 @@ public class SO_Tower : ScriptableObject
 {
     [SerializeField] new string name;
     [SerializeField] GameObject towerPrefab;
-    [SerializeField] int cost;
+    [SerializeField] int cost = 1;
 
     public string Name => name;
     public TowerType towerType;
@@ -19,7 +19,7 @@ public class SO_Tower : ScriptableObject
 [System.Serializable]
 public struct AttackStats
 {
-    public int damage;
+    public float damage;
     public float range;
     public float attackSpeed;
 

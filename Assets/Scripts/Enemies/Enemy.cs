@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     //Stats
-    private int hp;
+    private float hp;
     public float Speed;
     private float baseSpeed;
     private SO_Enemy enemyData;
@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     private bool isDebuffed = false;
     private float currentDebuff = 0f;
 
-    public int HP => hp;
+    public float HP => hp;
 
     public PathFollow PathFollow { get; private set; }
 
@@ -32,10 +32,12 @@ public class Enemy : MonoBehaviour
     {
         this.enemyData = enemyData;
 
+        transform.localScale = Vector3.one * enemyData.Size;
+
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = enemyData.Color;
 
-        hp = enemyData.HP;
+        hp = enemyData.HP * EnemyManager.I.GlobalHPMultiplyer;
         Speed = enemyData.Speed;
         baseSpeed = Speed;
         PathFollow.StartFollowingPath();
@@ -65,26 +67,28 @@ public class Enemy : MonoBehaviour
         Speed = baseSpeed;
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
         hp -= dmg;
         if (hp <= 0)
+        {
+            AudioManager.I.PlaySFX(enemyData.DeathClip);
             DestroyEnemy();
+        }
     }
 
     public void DestroyEnemy()
     {
         EnemyManager.I.Unregister(gameObject);
-        ResourcesManager.I.AddCoins(enemyData.CoinValue);
+        //ResourcesManager.I.AddCoins(enemyData.CoinValue);
         Destroy(gameObject);
         return;
     }
 
     public void PathEnd()
     {
-        EnemyManager.I.Unregister(gameObject);
         ResourcesManager.I.TakeDamage(enemyData.Dmg);
-        Destroy(gameObject);
+        DestroyEnemy();
         return;
     }
 }

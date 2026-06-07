@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7b0de04a75423f49aa26c4e0e19d565, type: 3}
-  m_Name: SupportTower
+  m_Name: LaserTower
   m_EditorClassIdentifier: Assembly-CSharp::SO_Tower
-  name: Suppert
-  towerPrefab: {fileID: 4995124935222668433, guid: 1c2fb8164ead67942903e7bbdde440ee, type: 3}
-  cost: 200
-  towerType: 2
+  name: Laser
+  towerPrefab: {fileID: 4688814261755269047, guid: 6f34854149ce68d45bf5bd47840b69e2, type: 3}
+  cost: 2
+  towerType: 0
   AttackStats:
-    damage: 0
-    range: 3
-    attackSpeed: 0
+    damage: 1
+    range: 4
+    attackSpeed: 5

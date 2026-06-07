@@ -7,7 +7,7 @@ public class GunnerTowerAttack : TowerAttack
     [SerializeField] private LineRenderer lineRenderer;
 
     [SerializeField] private int penetration = 1;
-    private float dmgFalloff = 0.5f;
+    private float dmgFalloff = 0.4f;
 
     private void Start()
     {
@@ -34,14 +34,14 @@ public class GunnerTowerAttack : TowerAttack
 
             if(hits.Count() > 0)
             {
-                int currentDmg = attackStats.damage;
+                float currentDmg = attackStats.damage;
                 int min = penetration < (hits.Count() - 1) ? penetration : (hits.Count() - 1);
                 var curPen = penetration;
 
                 for(int i = 0; i <= min; i++)
                 {
                     hits[i].collider.GetComponent<Enemy>().TakeDamage(currentDmg);
-                    currentDmg = Mathf.CeilToInt(currentDmg *  dmgFalloff);
+                    currentDmg = Mathf.CeilToInt(currentDmg *  (1f - dmgFalloff));
 
                     curPen--;
                 }
