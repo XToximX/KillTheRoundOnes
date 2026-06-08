@@ -37,7 +37,8 @@ public class EnemyManager : MonoBehaviour
 
     public void Unregister(GameObject enemy)
     {
-        enemiesLiving.Remove(enemy);
+        if(enemiesLiving.Contains(enemy))
+            enemiesLiving.Remove(enemy);
 
         if (enemiesLiving.Count == 0 && !isSpawningWave)
             OnAllEnemiesDead?.Invoke();

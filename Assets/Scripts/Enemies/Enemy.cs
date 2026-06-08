@@ -15,10 +15,13 @@ public class Enemy : MonoBehaviour
     private bool isDebuffed = false;
     private float currentDebuff = 0f;
 
+    private bool canDie = false;
+
     public float HP => hp;
     public float BaseHP => baseHp;
 
     public PathFollow PathFollow { get; private set; }
+
 
     private void Awake()
     {
@@ -45,6 +48,8 @@ public class Enemy : MonoBehaviour
         Speed = enemyData.Speed;
         baseSpeed = Speed;
         PathFollow.StartFollowingPath();
+
+        canDie = true;
     }
 
     public bool Debuff(float value)
@@ -73,7 +78,11 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        if (!canDie)
+            return; 
+        
         hp -= dmg;
+
         if (hp <= 0)
         {
             AudioManager.I.PlaySFX(enemyData.DeathClip);

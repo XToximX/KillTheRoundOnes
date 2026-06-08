@@ -82,7 +82,6 @@ public class WavesManager : MonoBehaviour
         ResourcesManager.I.AddCoins(1);
         SwitchButtonSprite();
 
-
         OnWaveEnd?.Invoke();
     }
 
