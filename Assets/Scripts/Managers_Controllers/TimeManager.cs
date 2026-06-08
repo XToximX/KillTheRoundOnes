@@ -5,6 +5,8 @@ public class TimeManager : MonoBehaviour
     public static TimeManager I;
     private bool isPaused;
 
+    [SerializeField] PauseMenu pauseMenu;
+
     private void Awake()
     {
         if (I != null && I != this)
@@ -21,7 +23,7 @@ public class TimeManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        pauseMenu = FindFirstObjectByType<PauseMenu>();   
     }
 
     // Update is called once per frame
@@ -47,15 +49,15 @@ public class TimeManager : MonoBehaviour
 
     public void PauseTime()
     {
-        if (!isPaused)
+        if (pauseMenu.IsGamePaused || WavesManager.I.IsWaveFrozen)
         {
             Time.timeScale = 0f;
             isPaused = true;
         }
         else
         {
-            isPaused = false;
             Time.timeScale = 1f;
+            isPaused = false;
         }
     }
 }

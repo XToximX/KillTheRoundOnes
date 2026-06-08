@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseCanva;
     private bool isGamePaused = false;
+    public bool IsGamePaused => isGamePaused;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +23,7 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         isGamePaused = !isGamePaused;
+
         TimeManager.I.PauseTime();
         pauseCanva.SetActive(isGamePaused);
     }

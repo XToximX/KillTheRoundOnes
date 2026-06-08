@@ -5878,6 +5878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0cad6efc89eb94580c8e3a1d5cf4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeManager
+  pauseMenu: {fileID: 1753620436}
 --- !u!1001 &886173017
 PrefabInstance:
   m_ObjectHideFlags: 0

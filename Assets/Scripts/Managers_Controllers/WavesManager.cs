@@ -20,6 +20,9 @@ public class WavesManager : MonoBehaviour
 
     private bool isWaveInProgress = false;
     private int currentWave = 0;
+    private bool isWaveFrozen = false;
+    public bool IsWaveFrozen => isWaveFrozen;
+
 
     [SerializeField] private TextMeshProUGUI waveDisplay;
     [SerializeField] private Image waveUIButton;
@@ -137,8 +140,11 @@ public class WavesManager : MonoBehaviour
 
     public void PauseWave()
     {
+        isWaveFrozen = !isWaveFrozen;
+
         SwitchButtonSprite();
         TimeManager.I.PauseTime();
+
     }
 
     private void SwitchButtonSprite()
