@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InputController.I.input.Gameplay.Esc.performed += EscBtnPerformed;
+        InputController.I.input.Pause.Esc.performed += EscBtnPerformed;
         pauseCanva.SetActive(false);
     }
 
@@ -26,6 +26,11 @@ public class PauseMenu : MonoBehaviour
 
         TimeManager.I.PauseTime();
         pauseCanva.SetActive(isGamePaused);
+
+        if (isGamePaused)
+            InputController.I.input.Gameplay.Disable();
+        else
+            InputController.I.input.Gameplay.Enable();
     }
 
     public void RestartGame()
@@ -40,6 +45,6 @@ public class PauseMenu : MonoBehaviour
 
     private void OnDestroy()
     {
-        InputController.I.input.Gameplay.Esc.performed -= EscBtnPerformed;
+        InputController.I.input.Pause.Esc.performed -= EscBtnPerformed;
     }
 }

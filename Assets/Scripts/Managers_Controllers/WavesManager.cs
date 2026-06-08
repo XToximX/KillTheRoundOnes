@@ -52,6 +52,8 @@ public class WavesManager : MonoBehaviour
     {
         EnemyManager.I.OnAllEnemiesDead += EndWave;
 
+        InputController.I.input.Gameplay.Space.performed += (callback) => OnButtonPressed();
+
         if (debuging)
             currentWave = startingWave;
 
@@ -61,8 +63,7 @@ public class WavesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-            OnButtonPressed();
+        
     }
 
     public void StartWave()

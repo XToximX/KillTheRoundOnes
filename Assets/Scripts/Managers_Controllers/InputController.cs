@@ -37,11 +37,13 @@ public class InputController : MonoBehaviour
     private void OnEnable()
     {
         input.Gameplay.Enable();
+        input.Pause.Enable();
     }
 
     private void OnDisable()
     {
         input.Gameplay.Disable();
+        input.Pause.Disable();
     }
 
     private void OnDestroy()
@@ -99,5 +101,6 @@ public class InputController : MonoBehaviour
     public void DisableInput()
     {
         input.Gameplay.Disable();
+        input.Pause.Disable();
     }
 }

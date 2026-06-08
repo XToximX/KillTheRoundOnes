@@ -1024,9 +1024,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Esc",
+                    "name": "Space",
                     "type": "Button",
-                    "id": "f299b1fa-fe93-45ee-98e5-587330c4050c",
+                    "id": "e977e986-d343-4318-89b6-72e872d27e3b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1069,7 +1069,35 @@
                 },
                 {
                     "name": "",
-                    "id": "40270909-9fda-4804-ae05-6d52e0344760",
+                    "id": "996fe2a8-7911-4f9f-84b6-1f90ae92889b",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Space",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Pause",
+            "id": "f962aa1a-a89f-44e9-83a3-8a310e0efd16",
+            "actions": [
+                {
+                    "name": "Esc",
+                    "type": "Button",
+                    "id": "9021684d-a858-46f1-b2a6-f60c675e894b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9a4dd7ce-d604-4549-9604-cc60fb9c9e54",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
