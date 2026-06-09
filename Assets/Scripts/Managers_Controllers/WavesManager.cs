@@ -60,6 +60,11 @@ public class WavesManager : MonoBehaviour
         GenerateWave(currentWave + 1);
     }
 
+    private void OnDisable()
+    {
+        EnemyManager.I.OnAllEnemiesDead -= EndWave;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -78,6 +83,9 @@ public class WavesManager : MonoBehaviour
 
     public void EndWave()
     {
+        if (!isWaveInProgress)
+            return;
+
         isWaveInProgress = false;
         GenerateWave(currentWave + 1);
         ResourcesManager.I.AddCoins(1);

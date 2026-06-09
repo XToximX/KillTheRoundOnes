@@ -2317,7 +2317,7 @@ MonoBehaviour:
   - {fileID: -9085765683596008760, guid: 5ef3f030322f9bb4381f846787fdc18e, type: 3}
   - {fileID: -3775778450483181077, guid: 5ef3f030322f9bb4381f846787fdc18e, type: 3}
   debuging: 0
-  startingWave: 10
+  startingWave: 25
 --- !u!1001 &306284622
 PrefabInstance:
   m_ObjectHideFlags: 0

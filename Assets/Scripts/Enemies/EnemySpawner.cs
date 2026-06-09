@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
         {
             foreach(var e in wave)
             {
-                var enemy = Instantiate(enemyPrefab);
+                var enemy = Instantiate(enemyPrefab, new Vector2(100f, 0f), Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetUp(e);
                 yield return waitForSeconds;
             }

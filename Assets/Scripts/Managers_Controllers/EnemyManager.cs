@@ -42,13 +42,16 @@ public class EnemyManager : MonoBehaviour
 
         if (enemiesLiving.Count == 0 && !isSpawningWave)
             OnAllEnemiesDead?.Invoke();
+
     }
 
     private void CalculateHPMulitier()
     {
-        GlobalHPMultiplyer = Mathf.Min(
-            4f,
-            Mathf.Pow(1.06f, WavesManager.I.CurrentWave)
-            );
+        //GlobalHPMultiplyer = Mathf.Min(
+        //    20f,
+        //    Mathf.Pow(1.06f, WavesManager.I.CurrentWave)
+        //    );
+
+        Mathf.Pow(1.06f, WavesManager.I.CurrentWave);
     }
 }
